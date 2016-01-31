@@ -10,9 +10,7 @@
 </jsp:include>
 
 
-
-    <body>
         <h1>Hello World!</h1>
 
         
-        <jsp:include page="footerIncludes.jsp"/>
+<jsp:include page="footerIncludes.jsp"/>
