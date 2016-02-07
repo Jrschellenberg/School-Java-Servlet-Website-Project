@@ -3,7 +3,6 @@ import java.sql.*;
 /**
  * @desc A singleton database access class for MySQL
  * @author Ramindu
- * http://rdeshapriya.com/a-singleton-java-class-for-mysql-db-connection/
  */
 public final class DBconnection {
     public Connection conn;
