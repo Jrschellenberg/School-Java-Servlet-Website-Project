@@ -22,6 +22,7 @@
 
         <div class="container-fluid"> 
             <div class="text-center"> 
+                  
                 <img src="images/logo.jpg" style="margin-bottom: 10px;">
                 <ul class="homeNav">
                     <li class="special"><a href="register.jsp">Register</a></li>
