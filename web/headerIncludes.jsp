@@ -32,7 +32,7 @@
                             <span class="icon-bar"></span>
                         </button>
 
-                        <a class="navbar-brand" title="description" href="home_url"><img src="images/logo-small.png" style="width:181px;height: 49px;"></a>
+                        <a class="navbar-brand" title="description" href="index.jsp"><img src="images/logo-small.png" style="width:181px;height: 49px;"></a>
 
                                 <form role="search" method="get" class="navbar-form" action="home_url" style="float:  right;">
                                     <div>
@@ -49,4 +49,3 @@
             </div> <!-- end .navbar -->
 
         </header> <!-- end header -->
-

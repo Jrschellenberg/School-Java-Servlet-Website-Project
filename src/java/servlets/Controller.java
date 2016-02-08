@@ -4,7 +4,7 @@
  */
 package servlets;
 
-import beans.loginValues;
+import beans.LoginValues;
 import java.io.*;
 import java.sql.SQLException;
 import java.util.Date;
@@ -35,8 +35,8 @@ public class Controller extends HttpServlet {
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(300);//Set time to invalidate to 5 minutes                
         
-        login dbLogin = new login();
-        loginValues valueObject = new loginValues();
+        Login dbLogin = new Login();
+        LoginValues valueObject = new LoginValues();
 
         String action = request.getParameter("action");
         if (action == null) {
@@ -48,10 +48,17 @@ public class Controller extends HttpServlet {
             String par_password = request.getParameter("password");
  
             if (par_username == null || par_password == null || par_username.equals("") || par_password.equals("")) {
-                valueObject.setMsg("Please type non empty username and password!");
+                valueObject.setMsg("Please fill in the username and password fields!");
             } else if (dbLogin.userLogin(par_username, par_password)) {
-                //Create a session on successful log in                
+                //Create a session on successful log in 
+               // session.invalidate();
                 session.setAttribute("username", par_username);
+                
+                if(dbLogin.userTypeAdmin(par_username)){
+                    session.setAttribute("admin", true);
+                    
+                }
+
                 
                 
                 valueObject.setUsername(par_username);
@@ -60,6 +67,8 @@ public class Controller extends HttpServlet {
                 
                 valueObject.setMsg("The username and/or password you supplied do not match our records. :(");
             }
+            
+            
         }
 
         request.setAttribute("vObj", valueObject);

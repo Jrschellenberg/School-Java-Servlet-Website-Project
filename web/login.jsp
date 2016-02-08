@@ -2,6 +2,13 @@
     <jsp:param name="title" value="Login" />
 </jsp:include>
 
+<% 
+    String s = "";
+    if(request.getSession().getAttribute("username") !=null){
+    s = request.getSession().getAttribute("username").toString();
+}
+ %>
+
 
     <div class="container-fluid"> 
 
@@ -15,22 +22,22 @@
                    
                     <% if (request.getParameter("action") != null){ %>
                     
-                    <jsp:useBean id="vObj" type="beans.loginValues" scope="request" />
+                    <jsp:useBean id="vObj" type="beans.LoginValues" scope="request" />
                     <h2><jsp:getProperty name="vObj" property="msg" /></h2>
                     
-                    <% }else{ %>
+                    <% }%>
 
                     <form id="login" action="Controller" method="GET" enctype="text/plain">
 
                         <label for="username">Username:</label>
-                        <input type="text" name="username" id="username" size="20" /><br />
+                        <input type="text" name="username" id="username" size="20" value="<%out.write(s);%>" /><br />
                         <label for="Password">Password:</label>
                         <input type="password" name="password" id="password" size="20" /><br />
 
                         <input type="submit" name="action" value="Login" />
                     </form>
                     
-                    <% } %>
+                    
                     <br /><br />
                     <br style="clear: left;" />
                     
