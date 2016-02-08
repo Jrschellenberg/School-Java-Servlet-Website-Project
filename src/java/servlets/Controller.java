@@ -30,20 +30,24 @@ public class Controller extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
-
+        
+        HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(300);//Set time to invalidate to 5 minutes  
+        UserValues valueObject = new UserValues();
+        Utilities util = new Utilities();
+        
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
+            util.forwardRequest(request, response, "/error.jsp");
         }
 
         //Login Processing 
-        if (action.equals("Login")) {
-            //Get session but only add username on successful login
-            HttpSession session = request.getSession();
-            session.setMaxInactiveInterval(300);//Set time to invalidate to 5 minutes                
+        else if (action.equals("Login")) {
+            //Get session but only add username on successful login          
 
-            login dbLogin = new login();
-            UserValues valueObject = new UserValues();
+            Login dbLogin = new Login();
+            
 
             String par_username = request.getParameter("username");
             String par_password = request.getParameter("password");
@@ -68,32 +72,30 @@ public class Controller extends HttpServlet {
             }
 
             request.setAttribute("vObj", valueObject);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
-            dispatcher.forward(request, response);
+            util.forwardRequest(request, response, "/login.jsp");
         }
 
         //Logout Processing 
-        if (action.equals("Logout")) {
+        else if (action.equals("Logout")) {
 
-            HttpSession session = request.getSession();
-            Utilities util = new Utilities();
+
+            
             ServletContext sc = this.getServletContext();
             session.invalidate();
 
-            UserValues valueObject = new UserValues();
+
 
             valueObject.setMsg("Thanks For Visiting!! you have successfully logged out");
 
             request.setAttribute("vObj", valueObject);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
-            dispatcher.forward(request, response);
+            util.forwardRequest(request, response, "/login.jsp");
         }
 
         //Register Processing 
-        if (action.equals("Register")) {
+        else if (action.equals("Register")) {
 
             Register dbRegister = new Register();
-            UserValues valueObject = new UserValues();
+
 
             String par_username = request.getParameter("username");
             String par_password = request.getParameter("password");
@@ -111,8 +113,11 @@ public class Controller extends HttpServlet {
             }
 
             request.setAttribute("vObj", valueObject);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/register.jsp");
-            dispatcher.forward(request, response);
+            util.forwardRequest(request, response, "/register.jsp");
+        }
+        
+        else{
+            util.forwardRequest(request, response, "/error.jsp");
         }
     }
 

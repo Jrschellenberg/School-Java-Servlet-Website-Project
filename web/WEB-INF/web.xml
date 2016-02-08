@@ -8,9 +8,13 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>servlets.Logout</servlet-class>
     </servlet>
-        <servlet>
+    <servlet>
         <servlet-name>Register</servlet-name>
         <servlet-class>servlets.Register</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PlayerServlet</servlet-name>
+        <servlet-class>servlets.PlayerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PlayerServlet</servlet-name>
+        <url-pattern>/PlayerServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
