@@ -22,11 +22,12 @@
                    
                     <% if (request.getParameter("action") != null){ %>
                     
-                    <jsp:useBean id="vObj" type="beans.LoginValues" scope="request" />
+                    <jsp:useBean id="vObj" type="beans.UserValues" scope="request" />
                     <h2><jsp:getProperty name="vObj" property="msg" /></h2>
                     
                     <% }%>
-
+                    
+                    <% if(request.getSession().getAttribute("username") == null){ %>
                     <form id="login" action="Controller" method="GET" enctype="text/plain">
 
                         <label for="username">Username:</label>
@@ -36,7 +37,7 @@
 
                         <input type="submit" name="action" value="Login" />
                     </form>
-                    
+                    <%}%>
                     
                     <br /><br />
                     <br style="clear: left;" />

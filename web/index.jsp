@@ -4,7 +4,6 @@
     Author     : Justin
 --%>
 
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -24,14 +23,9 @@
             <div class="text-center"> 
                   
                 <img src="images/logo.jpg" style="margin-bottom: 10px;">
-                <ul class="homeNav">
-                    <li class="special"><a href="register.jsp">Register</a></li>
-                    <li><a href="players.jsp">Players</a></li>
-                    <li><a href="clubs.jsp">Clubs</a></li>
-                    <li><a href="leagues.jsp">Leagues</a></li>
-                    <li><a href="nations.jsp">Nations</a></li>
-                    <li><a href="login.jsp">Login</a></li>
-                </ul>
+                
+                <jsp:include page="menu.jsp"/>
+                   
             </div>
 
             <div class="text-center" style="background-color:#BE1418; border-top: #960C0F solid 5px;padding: 70px 0 50px 0;width:100%"> 
@@ -56,5 +50,5 @@
         </div>
 
 
-        
+      
 <jsp:include page="footerIncludes.jsp"/>

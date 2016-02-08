@@ -8,13 +8,13 @@ package beans;
  *
  * @author Christopher
  */
-public class LoginValues {
+public class UserValues {
     
     private String msg;
     private String username;
     private String password;    
 
-    public LoginValues() {
+    public UserValues() {
     }
     
     public String getMsg() {
