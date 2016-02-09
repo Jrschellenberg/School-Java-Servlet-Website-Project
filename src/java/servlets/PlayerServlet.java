@@ -14,7 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import beans.PlayerValues;
 /**
  *
  * @author Justin
@@ -35,18 +35,23 @@ public class PlayerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         PlayerDBUtils PlayerUtil = new PlayerDBUtils();
-        beans.PlayerValues nValues = new beans.PlayerValues();
+        PlayerValues nValues = new PlayerValues();
         Utilities util = new Utilities();
               
         String playerID = request.getParameter("playerID");
         if(playerID == null){
+            
+           // show all players
+           nValues = PlayerUtil.playerStats(playerID);
+           request.setAttribute("playerValues", nValues);
            
         }
         else{
             nValues = PlayerUtil.playerStats(playerID);
+            request.setAttribute("playerValues", nValues);
         }
         
-        request.setAttribute("playerValues", nValues);
+        
         util.forwardRequest(request, response, "players.jsp");
         
 

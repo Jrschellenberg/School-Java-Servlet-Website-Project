@@ -18,6 +18,8 @@ public class PlayerValues {
     private int playerHeight;
     private int playerNumber;
     private String playerFoot;
+    private String playerNation;
+    private String playerClub;
     
     public PlayerValues(){
         playerName = "";
@@ -27,6 +29,8 @@ public class PlayerValues {
         playerHeight = 0;
         playerNumber = 0;
         playerFoot = "";
+        playerNation = "";
+        playerClub = "";
     }
 
 
@@ -84,6 +88,22 @@ public class PlayerValues {
 
     public void setPlayerFoot(String playerFoot) {
         this.playerFoot = playerFoot;
+    }
+    
+    public String getPlayerNation() {
+        return playerNation;
+    }
+
+    public void setPlayerNation(String playerNation) {
+        this.playerNation = playerNation;
+    }
+    
+    public String getPlayerClub() {
+        return playerClub;
+    }
+
+    public void setPlayerClub(String playerClub) {
+        this.playerClub = playerClub;
     }
     
 }
