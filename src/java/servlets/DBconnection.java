@@ -9,11 +9,11 @@ public final class DBconnection {
     private Statement statement;
     public static DBconnection db;
     private DBconnection() {
-        String url= "jdbc:mysql://localhost:3308/";
-        String dbName = "project";
+        String url= "jdbc:mysql://localhost:3306/";
+        String dbName = "playesdb";
         String driver = "com.mysql.jdbc.Driver";
         String userName = "root";
-        String password = "toor";
+        String password = "123456";
         try {
             Class.forName(driver).newInstance();
             this.conn = (Connection)DriverManager.getConnection(url+dbName,userName,password);

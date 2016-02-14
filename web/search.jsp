@@ -14,7 +14,7 @@
                    
                     <% if (request.getParameter("action") != null){ %>
                     
-                    <jsp:useBean id="vObj" type="beans.SearchValue" scope="request" />
+                    <jsp:useBean id="vObj" type="beans.PlayerValues" scope="request" />
                     <h2><jsp:getProperty name="vObj" property="msg" /></h2>
                     
                     <% }else{%>
