@@ -34,9 +34,9 @@
 
                         <a class="navbar-brand" title="description" href="index.jsp"><img src="images/logo-small.png" style="width:181px;height: 49px;"></a>
 
-                                <form role="search" method="get" class="navbar-form" action="home_url" style="float:  right;">
+                                <form id="search" action="Search" method="GET" enctype="text/plain" class="navbar-form" style="float:  right;">
                                     <div>
-                                        <input autocomplete="off" type="text" value="" name="s" style="font-size:10pt;height:25px;width: 200px">   
+                                        <input type="text" name="q" id="q" style="font-size:10pt;height:25px;width: 200px">   
                                     </div>
                                 </form>
                     </div>

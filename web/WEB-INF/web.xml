@@ -16,6 +16,10 @@
         <servlet-name>PlayerServlet</servlet-name>
         <servlet-class>servlets.PlayerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>servlets.SearchServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/Controller</url-pattern>
@@ -30,7 +34,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PlayerServlet</servlet-name>
-        <url-pattern>/PlayerServlet</url-pattern>
+        <url-pattern>/Player</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/Search</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

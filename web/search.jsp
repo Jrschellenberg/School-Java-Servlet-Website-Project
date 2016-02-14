@@ -11,20 +11,23 @@
             <div class="text-center" style="background-color:#BE1418;width:100%;border-bottom: #960C0F solid 5px;"> 
                 <div style="margin: 0 auto;width:1000px">
                     <br style="clear: left;" />
-                   
-                    <% if (request.getParameter("action") != null){ %>
+
+                    <% if (request.getParameter("q") != null){ %>
                     
-                    <jsp:useBean id="vObj" type="beans.PlayerValues" scope="request" />
-                    <h2><jsp:getProperty name="vObj" property="msg" /></h2>
+                    <jsp:useBean id="playerValues" type="beans.PlayerValues" scope="request" />
+                    <h1> Players Name ... <jsp:getProperty name="playerValues" property="playerName" /></h1>
+                    <h1> Players Picture ...<jsp:getProperty name="playerValues" property="playerPicture" /></h1>
+                    <h1> Players Position ...<jsp:getProperty name="playerValues" property="playerPosition" /></h1>
+                    <h1> Players Club ...<jsp:getProperty name="playerValues" property="playerClub" /></h1>
+                    <h1> Players Nation ...<jsp:getProperty name="playerValues" property="playerNation" /></h1>
                     
                     <% }else{%>
-                   
-                    <form id="search" action="Controller" method="GET" enctype="text/plain">
-                        
-                        <input type="text" name="searchValue" id="searchValue" size="20" />
-                        <input type="submit" name="action" value="Search" />
-                        
+
+                    <form id="search" action="Search" method="GET" enctype="text/plain">
+                        <input type="text" name="q" id="q" size="20" />
+                        <input type="submit"  />
                     </form>
+                    
                     <%}%>
                     
                     <br /><br />

@@ -7,7 +7,7 @@
     }
 %>
 <ul class="<%out.write(style);%>">
-    <li><a href="<%=request.getContextPath()%>/PlayerServlet">Players</a></li>
+    <li><a href="<%=request.getContextPath()%>/Player">Players</a></li>
     <li><a href="clubs.jsp">Clubs</a></li>
     <li><a href="leagues.jsp">Leagues</a></li>
     <li><a href="nations.jsp">Nations</a></li>

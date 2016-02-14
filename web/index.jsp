@@ -30,9 +30,9 @@
 
             <div class="text-center" style="background-color:#BE1418; border-top: #960C0F solid 5px;padding: 70px 0 50px 0;width:100%"> 
                 <div class="text-center">  
-                    <form role="search" method="get" class="navbar-form" action="index.jsp">
+                    <form id="search" action="Search" method="GET" enctype="text/plain" class="navbar-form">
                         <div class="sf_search" style="padding: 10px 0 10px 0;">
-                            <input  class="sf_input" autocomplete="off" type="text" value="Search Your Favorite Player" name="s" style="font-size:16pt;width:400px;height:30px;text-align: center">   
+                            <input  class="sf_input" type="text" name="q" id="q" value="Search Your Favorite Player" style="font-size:16pt;width:400px;height:30px;text-align: center">   
                         </div>
                     </form>
                 </div>

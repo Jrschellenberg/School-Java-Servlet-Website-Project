@@ -14,4 +14,5 @@
 
 <h1> Players Club ...<jsp:getProperty name="playerValues" property="playerClub" /></h1>
 <h1> Players Nation ...<jsp:getProperty name="playerValues" property="playerNation" /></h1>
+
 <jsp:include page="footerIncludes.jsp"/>
