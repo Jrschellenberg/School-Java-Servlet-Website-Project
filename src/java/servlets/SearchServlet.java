@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import beans.*;
+import java.util.ArrayList;
 /**
  *
  * @author Justin
@@ -35,9 +36,10 @@ public class SearchServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
-        Search searchDB = new Search();
         
-        PlayerValues nValues = new PlayerValues();
+        Search searchDB = new Search();
+      
+         ArrayList<PlayerValues> nValues = new  ArrayList<PlayerValues>();
         ErrorMassage massage = new ErrorMassage();
         
         Utilities util = new Utilities();
@@ -47,7 +49,7 @@ public class SearchServlet extends HttpServlet {
         if(playerName == null){
             
              
-             massage.setMsg("Use the search form to search for a player !");
+             massage.setMsg("Please Use the search box at the top to search for a player !");
              request.setAttribute("ErrorMassage", massage);
              util.forwardRequest(request, response, "error.jsp");
              

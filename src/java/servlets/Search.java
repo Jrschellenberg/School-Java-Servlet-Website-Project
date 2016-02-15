@@ -7,6 +7,7 @@ package servlets;
 
 import java.sql.*;
 import beans.PlayerValues;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,14 +16,21 @@ import beans.PlayerValues;
 public class Search {
     
     
-    public PlayerValues playerStats(String name) throws ClassNotFoundException, SQLException {
-        PlayerValues values = new PlayerValues();
+    public ArrayList<PlayerValues> playerStats(String name) throws ClassNotFoundException, SQLException {
+        
+        ArrayList<PlayerValues> results = new ArrayList<PlayerValues>();
+        
+        
         
         DBconnection.db.getDbCon();
         ResultSet resultSet = DBconnection.db.query("SELECT * FROM players WHERE player_name LIKE '%"+ name +"%' ");
        
         
         while (resultSet.next()) { //safeguard if query executed or not.
+            
+            PlayerValues values = new PlayerValues();
+            
+            values.setPlayerId(resultSet.getInt("Player_id"));
             values.setPlayerName(resultSet.getString("Player_name"));
             values.setPlayerPicture(resultSet.getString("Player_picture"));
             values.setPlayerPosition(resultSet.getString("Player_position"));
@@ -39,9 +47,10 @@ public class Search {
                 values.setPlayerNation(resultSetPlayerNation.getString("nation_name"));
              }
             
+            results.add(values);
         }
         
-        return values;
+        return results;
     }
     
     public boolean foundPlayers(String name) throws ClassNotFoundException, SQLException {

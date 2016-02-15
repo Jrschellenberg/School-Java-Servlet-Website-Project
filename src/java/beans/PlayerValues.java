@@ -11,6 +11,7 @@ package beans;
  */
 public class PlayerValues {
     
+    private int playerId;
     private String playerName;
     private String playerBirthday;
     private String playerPicture;
@@ -22,6 +23,7 @@ public class PlayerValues {
     private String playerClub;
     
     public PlayerValues(){
+        playerId = 0;
         playerName = "";
         playerBirthday = "";
         playerPicture = "";
@@ -34,6 +36,14 @@ public class PlayerValues {
     }
 
 
+    public int getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(int playerId) {
+        this.playerId = playerId;
+    }
+    
     public String getPlayerName() {
         return playerName;
     }
