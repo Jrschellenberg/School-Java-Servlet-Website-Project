@@ -16,7 +16,7 @@
         <li><a href="<%=request.getContextPath()%>/Controller?action=Logout">Logout</a></li>
     <%}else{%>
     <li><a href="login.jsp">Login</a></li>
-    <li class="special"><a href="register">Register</a></li>
+    <li class="special"><a href="register.jsp">Register</a></li>
     <%}%>
     <% if(request.getSession().getAttribute("admin") != null){ %>
     <li class="special"><a href="adminpage">Admin Page</a></li>
