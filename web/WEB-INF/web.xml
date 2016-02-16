@@ -21,6 +21,10 @@
         <servlet-class>servlets.ClubServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>NationServlet</servlet-name>
+        <servlet-class>servlets.NationServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>PlayerServlet</servlet-name>
         <servlet-class>servlets.PlayerServlet</servlet-class>
     </servlet>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>ClubServlet</servlet-name>
         <url-pattern>/clubs</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NationServlet</servlet-name>
+        <url-pattern>/nations</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PlayerServlet</servlet-name>

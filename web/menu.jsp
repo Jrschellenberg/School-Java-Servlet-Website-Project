@@ -10,7 +10,7 @@
     <li><a href="<%=request.getContextPath()%>/players">Players</a></li>
     <li><a href="clubs">Clubs</a></li>
     <li><a href="leagues">Leagues</a></li>
-    <li><a href="nations.jsp">Nations</a></li>
+    <li><a href="nations">Nations</a></li>
     
     <% if(request.getSession().getAttribute("username") !=null){ %>
         <li><a href="<%=request.getContextPath()%>/Controller?action=Logout">Logout</a></li>
