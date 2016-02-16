@@ -30,7 +30,7 @@
 
             <div class="text-center" style="background-color:#BE1418; border-top: #960C0F solid 5px;padding: 70px 0 50px 0;width:100%"> 
                 <div class="text-center">  
-                    <form id="search" action="Search" method="GET" enctype="text/plain" class="navbar-form">
+                    <form id="search" action="search" method="GET" enctype="text/plain" class="navbar-form">
                         <div class="sf_search" style="padding: 10px 0 10px 0;">
                             <input  class="sf_input" type="text" name="q" id="q" value="Search Your Favorite Player" style="font-size:16pt;width:400px;height:30px;text-align: center">   
                         </div>

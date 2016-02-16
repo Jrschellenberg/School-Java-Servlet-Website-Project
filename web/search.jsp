@@ -14,7 +14,7 @@
                     <br style="clear: left;" />
     
                     <c:forEach var="item" items="${playerValues}">
-                        <h1><a href="<%=request.getContextPath()%>/Player?playerID=${item.playerId}">${item.playerName}</a></h1>
+                        <h1><a href="<%=request.getContextPath()%>/players?p=${item.playerId}">${item.playerName}</a></h1>
                     </c:forEach>
                           
                     <br /><br />

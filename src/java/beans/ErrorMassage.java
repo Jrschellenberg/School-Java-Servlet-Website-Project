@@ -9,6 +9,7 @@ public class ErrorMassage {
     private String msg;
 
     public ErrorMassage() {
+        msg="";
     }
     
     public String getMsg() {

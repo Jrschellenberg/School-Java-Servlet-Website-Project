@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import beans.ErrorMassage;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -14,13 +15,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import beans.PlayerValues;
+import beans.*;
 import java.util.ArrayList;
 /**
  *
  * @author Justin
  */
-public class PlayerServlet extends HttpServlet {
+public class LeagueServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,25 +36,43 @@ public class PlayerServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
-        Player playerDB = new Player();
-        PlayerValues nValues = new PlayerValues();
-        ArrayList<PlayerValues> allPlayers = new  ArrayList<PlayerValues>();
+        
+        League leagueDB = new League();
+      
+        ArrayList<LeagueValues> LeagueValues = new  ArrayList<LeagueValues>();
+        ArrayList<ClubValues> clubsValues = new  ArrayList<ClubValues>();
+        ArrayList<PlayerValues> playersValues = new  ArrayList<PlayerValues>();
+        ErrorMassage massage = new ErrorMassage();
+        
         Utilities util = new Utilities();
               
-        String playerID = request.getParameter("p");
-        if(playerID == null){
+        String leagueId = request.getParameter("l");
+        
+        if(leagueId == null){
             
-            allPlayers = playerDB.allPlayers();
-            request.setAttribute("allplayers", allPlayers);
-           
+            LeagueValues = leagueDB.allLeagues();
+            request.setAttribute("leagues", LeagueValues);
+            util.forwardRequest(request, response, "leagues.jsp");
+             
         }
-        else{
-            nValues = playerDB.playerStats(playerID);
-            request.setAttribute("playerValues", nValues);
+        else if(leagueDB.leagueFound(leagueId)){
+            
+            clubsValues =   leagueDB.clubs(leagueId);
+            playersValues = leagueDB.players(leagueId);
+            
+            request.setAttribute("clubs", clubsValues);
+            request.setAttribute("players", playersValues);
+            util.forwardRequest(request, response, "leagues.jsp");
+        }else{
+            
+             massage.setMsg("Sorry No results found !");
+             request.setAttribute("ErrorMassage", massage);
+             util.forwardRequest(request, response, "error.jsp");
+             
         }
         
         
-        util.forwardRequest(request, response, "players.jsp");
+        
         
 
     }

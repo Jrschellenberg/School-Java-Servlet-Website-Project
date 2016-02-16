@@ -13,6 +13,10 @@
         <servlet-class>servlets.Register</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>LeagueServlet</servlet-name>
+        <servlet-class>servlets.LeagueServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>PlayerServlet</servlet-name>
         <servlet-class>servlets.PlayerServlet</servlet-class>
     </servlet>
@@ -30,15 +34,19 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
-        <url-pattern>/Register</url-pattern>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LeagueServlet</servlet-name>
+        <url-pattern>/leagues</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PlayerServlet</servlet-name>
-        <url-pattern>/Player</url-pattern>
+        <url-pattern>/players</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
-        <url-pattern>/Search</url-pattern>
+        <url-pattern>/search</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
