@@ -20,15 +20,15 @@
                 <div style="margin: 0 auto;width:1000px">
                     <br style="clear: left;" />
                    
-                    <% if (request.getParameter("action") != null){ %>
+
                     
                     <jsp:useBean id="vObj" type="beans.UserValues" scope="request" />
                     <h2><jsp:getProperty name="vObj" property="msg" /></h2>
                     
-                    <% }%>
+ 
                     
                     <% if(request.getSession().getAttribute("username") == null){ %>
-                    <form id="login" action="<%=request.getContextPath()%>/Controller" method="POST">
+                    <form id="login" action="<%=request.getContextPath()%>/Login" method="POST">
 
                         <label for="username">Username:</label>
                         <input type="text" name="username" id="username" size="20" value="<%out.write(s);%>" /><br />

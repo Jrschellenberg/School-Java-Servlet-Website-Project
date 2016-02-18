@@ -12,12 +12,12 @@
                 <div style="margin: 0 auto;width:1000px">
                     <br style="clear: left;" />
                    
-                    <% if (request.getParameter("action") != null){ %>
+
                     <jsp:useBean id="vObj" type="beans.UserValues" scope="request" />
                     <h2><jsp:getProperty name="vObj" property="msg" /></h2>
-                    <% }%>
+
                     
-                    <form id="register" action="Controller" method="POST">
+                    <form id="register" action="<%=request.getContextPath()%>/Register" method="POST">
                         <label for="username">Username:</label>
                         <input type="text" name="username" id="username" size="20" /><br />
                         <label for="Password">Password:</label>

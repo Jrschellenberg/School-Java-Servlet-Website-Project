@@ -5,7 +5,7 @@
 
 <% if (request.getParameter("p") == null){ %>
 <c:forEach var="p" items="${allplayers}">
-    <h1><a href="<%=request.getContextPath()%>/players?p=${p.playerId}">${p.playerName}</a></h1>
+    <h1><a href="<%=request.getContextPath()%>/Players?p=${p.playerId}">${p.playerName}</a></h1>
 </c:forEach>
 <% }else{ %>
 <jsp:useBean id="playerValues" type="beans.PlayerValues" scope="request" />

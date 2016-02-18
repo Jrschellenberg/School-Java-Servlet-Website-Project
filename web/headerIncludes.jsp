@@ -32,7 +32,7 @@
                             <span class="icon-bar"></span>
                         </button>
 
-                        <a class="navbar-brand" title="description" href="index.jsp"><img src="images/logo-small.png" style="width:181px;height: 49px;"></a>
+                        <a class="navbar-brand" title="description" href="<%=request.getContextPath()%>/Home"><img src="images/logo-small.png" style="width:181px;height: 49px;"></a>
 
                                 <form id="search" action="<%=request.getContextPath()%>/Search" method="GET" enctype="text/plain" class="navbar-form" style="float:  right;">
                                     <div>

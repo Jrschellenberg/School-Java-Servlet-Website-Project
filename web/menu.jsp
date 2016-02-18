@@ -13,10 +13,10 @@
     <li><a href="<%=request.getContextPath()%>/Nations">Nations</a></li>
     
     <% if(request.getSession().getAttribute("username") !=null){ %>
-        <li><a href="<%=request.getContextPath()%>/Controller?action=Logout">Logout</a></li>
+        <li><a href="<%=request.getContextPath()%>/Login?action=Logout">Logout</a></li>
     <%}else{%>
     <li><a href="<%=request.getContextPath()%>/Login">Login</a></li>
-    <li class="special"><a href="register.jsp">Register</a></li>
+    <li class="special"><a href="<%=request.getContextPath()%>/Register">Register</a></li>
     <%}%>
     <% if(request.getSession().getAttribute("admin") != null){ %>
     <li class="special"><a href="adminpage">Admin Page</a></li>

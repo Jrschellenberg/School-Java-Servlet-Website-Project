@@ -1,24 +1,30 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package servlets;
 
-import utils.*;
-import beans.*;
-import java.io.*;
+import beans.ErrorMassage;
+import beans.UserValues;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import utils.DBUtilities;
+import utils.Utilities;
 
 /**
  *
- * @author HFamily
+ * @author Justin
  */
-public class Controller extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,10 +34,11 @@ public class Controller extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
-        
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(60*60*5);//Set time to invalidate to 5 hours 
         UserValues valueObject = new UserValues();
@@ -43,63 +50,12 @@ public class Controller extends HttpServlet {
         
         String action = request.getParameter("action");
         if (action == null) {
-            action = "";
-            util.forwardRequest(request, response, "WEB-INF/error.jsp");
-        }
-
-        //Login Processing 
-        else if (action.equals("Login")) {
-            //Get session but only add username on successful login          
-
-
-            
-
-            String par_username = request.getParameter("username");
-            String par_password = request.getParameter("password");
-
-            if (par_username == null || par_password == null || par_username.equals("") || par_password.equals("")) {
-                valueObject.setMsg("Please fill in the username and password fields!");
-            } else if (dbLogin.userLogin(par_username, par_password)) {
-                //Create a session on successful log in 
-                // session.invalidate();
-                session.setAttribute("username", par_username);
-
-                if (dbLogin.userTypeAdmin(par_username)) {
-                    session.setAttribute("admin", true);
-
-                }
-
-                valueObject.setUsername(par_username);
-                valueObject.setMsg("you have successfully logged in");
-            } else {
-
-                valueObject.setMsg("The username and/or password you supplied do not match our records. :(");
-            }
-
+            valueObject.setMsg("Please enter a username and Password");
             request.setAttribute("vObj", valueObject);
-            //response.sendRedirect(request.getContextPath()+"/Login");
-            util.includeRequest(request, response, "WEB-INF/login.jsp");
-        }
-
-        //Logout Processing 
-        else if (action.equals("Logout")) {
-          
-            ServletContext sc = this.getServletContext();
-            session.invalidate();
-
-            valueObject.setMsg("Thanks For Visiting!! you have successfully logged out");
-
-            request.setAttribute("vObj", valueObject);
-            //response.sendRedirect(request.getContextPath()+"/Login");
-            util.forwardRequest(request, response, "WEB-INF/login.jsp");
-        }
-
-        //Register Processing 
+            util.forwardRequest(request, response, "WEB-INF/register.jsp");
+        }        
+                //Register Processing 
         else if (action.equals("Register")) {
-
-
-
-
             String par_username = request.getParameter("username");
             String par_password = request.getParameter("password");
 
@@ -116,7 +72,7 @@ public class Controller extends HttpServlet {
             }
 
             request.setAttribute("vObj", valueObject);
-            util.forwardRequest(request, response, "/register.jsp");
+            util.forwardRequest(request, response, "WEB-INF/register.jsp");
         }
         
         else{
@@ -138,10 +94,8 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -158,10 +112,8 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -174,4 +126,5 @@ public class Controller extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

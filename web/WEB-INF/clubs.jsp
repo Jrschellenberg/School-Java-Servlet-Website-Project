@@ -17,12 +17,12 @@
                     <% if (request.getParameter("c") == null){ %>
                     Clubs:
                     <c:forEach var="c" items="${clubs}">
-                        <h1><a href="<%=request.getContextPath()%>/clubs?c=${c.clubId}">${c.clubName}</a></h1>
+                        <h1><a href="<%=request.getContextPath()%>/Clubs?c=${c.clubId}">${c.clubName}</a></h1>
                     </c:forEach>
                         <% }else{ %>
                     players:
                     <c:forEach var="p" items="${players}">
-                        <h1><a href="<%=request.getContextPath()%>/players?p=${p.playerId}">${p.playerName}</a></h1>
+                        <h1><a href="<%=request.getContextPath()%>/Players?p=${p.playerId}">${p.playerName}</a></h1>
                     </c:forEach>
                      <% } %>     
                     <br />

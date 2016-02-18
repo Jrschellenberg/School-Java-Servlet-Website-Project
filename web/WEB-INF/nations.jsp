@@ -18,12 +18,12 @@
                     <% if (request.getParameter("n") == null){ %>
                     Nations:
                     <c:forEach var="n" items="${nations}">
-                        <h1><a href="<%=request.getContextPath()%>/nations?n=${n.nationId}">${n.nationName}</a></h1>
+                        <h1><a href="<%=request.getContextPath()%>/Nations?n=${n.nationId}">${n.nationName}</a></h1>
                     </c:forEach>
                         <% }else{ %>
                     players:
                     <c:forEach var="p" items="${players}">
-                        <h1><a href="<%=request.getContextPath()%>/players?p=${p.playerId}">${p.playerName}</a></h1>
+                        <h1><a href="<%=request.getContextPath()%>/Players?p=${p.playerId}">${p.playerName}</a></h1>
                     </c:forEach>
                      <% } %>     
                     <br />

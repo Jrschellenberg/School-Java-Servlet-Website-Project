@@ -9,7 +9,6 @@ import utils.DBUtilities;
 import utils.Utilities;
 import beans.ErrorMassage;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -90,9 +89,7 @@ public class ClubServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PlayerServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(PlayerServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -110,9 +107,7 @@ public class ClubServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PlayerServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(PlayerServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
