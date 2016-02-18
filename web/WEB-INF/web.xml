@@ -9,10 +9,6 @@
         <servlet-class>servlets.Logout</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Register</servlet-name>
-        <servlet-class>servlets.Register</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>LeagueServlet</servlet-name>
         <servlet-class>servlets.LeagueServlet</servlet-class>
     </servlet>
@@ -32,6 +28,10 @@
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>servlets.SearchServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>servlets.LoginServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/Controller</url-pattern>
@@ -41,28 +41,28 @@
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Register</servlet-name>
-        <url-pattern>/register</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>LeagueServlet</servlet-name>
-        <url-pattern>/leagues</url-pattern>
+        <url-pattern>/Leagues</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ClubServlet</servlet-name>
-        <url-pattern>/clubs</url-pattern>
+        <url-pattern>/Clubs</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>NationServlet</servlet-name>
-        <url-pattern>/nations</url-pattern>
+        <url-pattern>/Nations</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PlayerServlet</servlet-name>
-        <url-pattern>/players</url-pattern>
+        <url-pattern>/Players</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
-        <url-pattern>/search</url-pattern>
+        <url-pattern>/Search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

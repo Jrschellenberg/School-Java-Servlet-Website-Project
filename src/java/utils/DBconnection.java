@@ -1,4 +1,4 @@
-package servlets;
+package utils;
 import java.sql.*;
 /**
  * @desc A singleton database access class for MySQL
@@ -9,11 +9,11 @@ public final class DBconnection {
     private Statement statement;
     public static DBconnection db;
     private DBconnection() {
-        String url= "jdbc:mysql://localhost:3306/";
-        String dbName = "playesdb";
+        String url= "jdbc:mysql://localhost:3308/";
+        String dbName = "project";
         String driver = "com.mysql.jdbc.Driver";
         String userName = "root";
-        String password = "123456";
+        String password = "toor";
         try {
             Class.forName(driver).newInstance();
             this.conn = (Connection)DriverManager.getConnection(url+dbName,userName,password);

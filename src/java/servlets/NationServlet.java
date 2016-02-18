@@ -5,6 +5,8 @@
  */
 package servlets;
 
+import utils.DBUtilities;
+import utils.Utilities;
 import beans.ErrorMassage;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,7 +39,7 @@ public class NationServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         
-        Nation nationDB = new Nation();
+        DBUtilities nationDB = DBUtilities.getInstance();
 
         ArrayList<NationValues> nationValues = new  ArrayList<NationValues>();
         ArrayList<PlayerValues> playersValues = new  ArrayList<PlayerValues>();
@@ -51,20 +53,20 @@ public class NationServlet extends HttpServlet {
             
             nationValues = nationDB.allNations();
             request.setAttribute("nations", nationValues);
-            util.forwardRequest(request, response, "nations.jsp");
+            util.forwardRequest(request, response, "/WEB-INF/nations.jsp");
              
         }
         else if(nationDB.nationFound(nationId)){
             
-            playersValues = nationDB.players(nationId);
+            playersValues = nationDB.nationPlayers(nationId);
             request.setAttribute("players", playersValues);
-            util.forwardRequest(request, response, "nations.jsp");
+            util.forwardRequest(request, response, "/WEB-INF/nations.jsp");
             
         }else{
             
              massage.setMsg("Sorry No results found !");
              request.setAttribute("ErrorMassage", massage);
-             util.forwardRequest(request, response, "error.jsp");
+             util.forwardRequest(request, response, "/WEB-INF/error.jsp");
              
         }
         

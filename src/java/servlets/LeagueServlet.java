@@ -5,6 +5,8 @@
  */
 package servlets;
 
+import utils.DBUtilities;
+import utils.Utilities;
 import beans.ErrorMassage;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,7 +39,7 @@ public class LeagueServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         
-        League leagueDB = new League();
+        DBUtilities leagueDB = DBUtilities.getInstance();
       
         ArrayList<LeagueValues> LeagueValues = new  ArrayList<LeagueValues>();
         ArrayList<ClubValues> clubsValues = new  ArrayList<ClubValues>();
@@ -52,22 +54,22 @@ public class LeagueServlet extends HttpServlet {
             
             LeagueValues = leagueDB.allLeagues();
             request.setAttribute("leagues", LeagueValues);
-            util.forwardRequest(request, response, "leagues.jsp");
+            util.forwardRequest(request, response, "/WEB-INF/leagues.jsp");
              
         }
         else if(leagueDB.leagueFound(leagueId)){
             
             clubsValues =   leagueDB.clubs(leagueId);
-            playersValues = leagueDB.players(leagueId);
+            playersValues = leagueDB.leaguePlayers(leagueId);
             
             request.setAttribute("clubs", clubsValues);
             request.setAttribute("players", playersValues);
-            util.forwardRequest(request, response, "leagues.jsp");
+            util.forwardRequest(request, response, "/WEB-INF/leagues.jsp");
         }else{
             
              massage.setMsg("Sorry No results found !");
              request.setAttribute("ErrorMassage", massage);
-             util.forwardRequest(request, response, "error.jsp");
+             util.forwardRequest(request, response, "/WEB-INF/error.jsp");
              
         }
         

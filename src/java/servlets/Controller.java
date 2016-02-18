@@ -4,6 +4,7 @@
  */
 package servlets;
 
+import utils.*;
 import beans.*;
 import java.io.*;
 import java.sql.SQLException;
@@ -32,21 +33,25 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         
         HttpSession session = request.getSession();
-        session.setMaxInactiveInterval(300);//Set time to invalidate to 5 minutes  
+        session.setMaxInactiveInterval(60*60*5);//Set time to invalidate to 5 hours 
         UserValues valueObject = new UserValues();
         Utilities util = new Utilities();
+        ErrorMassage eMsg = new ErrorMassage();
+        DBUtilities dbLogin = DBUtilities.getInstance();
+        eMsg.setMsg("Sorry but we encountered an error!");
+        request.setAttribute("ErrorMassage", eMsg);
         
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
-            util.forwardRequest(request, response, "/error.jsp");
+            util.forwardRequest(request, response, "WEB-INF/error.jsp");
         }
 
         //Login Processing 
         else if (action.equals("Login")) {
             //Get session but only add username on successful login          
 
-            Login dbLogin = new Login();
+
             
 
             String par_username = request.getParameter("username");
@@ -72,29 +77,27 @@ public class Controller extends HttpServlet {
             }
 
             request.setAttribute("vObj", valueObject);
-            util.forwardRequest(request, response, "/login.jsp");
+            //response.sendRedirect(request.getContextPath()+"/Login");
+            util.includeRequest(request, response, "WEB-INF/login.jsp");
         }
 
         //Logout Processing 
         else if (action.equals("Logout")) {
-
-
-            
+          
             ServletContext sc = this.getServletContext();
             session.invalidate();
-
-
 
             valueObject.setMsg("Thanks For Visiting!! you have successfully logged out");
 
             request.setAttribute("vObj", valueObject);
-            util.forwardRequest(request, response, "/login.jsp");
+            //response.sendRedirect(request.getContextPath()+"/Login");
+            util.forwardRequest(request, response, "WEB-INF/login.jsp");
         }
 
         //Register Processing 
         else if (action.equals("Register")) {
 
-            Register dbRegister = new Register();
+
 
 
             String par_username = request.getParameter("username");
@@ -102,12 +105,12 @@ public class Controller extends HttpServlet {
 
             if (par_username == null || par_password == null || par_username.equals("") || par_password.equals("")) {
                 valueObject.setMsg("Please fill in the username and password fields!");
-            } else if (dbRegister.usernameExist(par_username)) {
+            } else if (dbLogin.usernameExist(par_username)) {
 
                 valueObject.setUsername(par_username);
                 valueObject.setMsg("Sorry!! This username (" + par_username + ") already exists");
 
-            } else if (dbRegister.userRegister(par_username, par_password) == 1) {
+            } else if (dbLogin.userRegister(par_username, par_password) == 1) {
 
                 valueObject.setMsg("You have successfully Registered !");
             }
@@ -117,7 +120,7 @@ public class Controller extends HttpServlet {
         }
         
         else{
-            util.forwardRequest(request, response, "/error.jsp");
+            util.forwardRequest(request, response, "WEB-INF/error.jsp");
         }
     }
 

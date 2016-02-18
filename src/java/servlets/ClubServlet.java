@@ -5,6 +5,8 @@
  */
 package servlets;
 
+import utils.DBUtilities;
+import utils.Utilities;
 import beans.ErrorMassage;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,7 +39,7 @@ public class ClubServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         
-        Club clubDB = new Club();
+        DBUtilities clubDB = DBUtilities.getInstance();
 
         ArrayList<ClubValues> clubsValues = new  ArrayList<ClubValues>();
         ArrayList<PlayerValues> playersValues = new  ArrayList<PlayerValues>();
@@ -51,14 +53,14 @@ public class ClubServlet extends HttpServlet {
             
             clubsValues = clubDB.allClubs();
             request.setAttribute("clubs", clubsValues);
-            util.forwardRequest(request, response, "clubs.jsp");
+            util.forwardRequest(request, response, "/WEB-INF/clubs.jsp");
              
         }
         else if(clubDB.clubFound(clubId)){
             
-            playersValues = clubDB.players(clubId);
+            playersValues = clubDB.clubPlayers(clubId);
             request.setAttribute("players", playersValues);
-            util.forwardRequest(request, response, "clubs.jsp");
+            util.forwardRequest(request, response, "/WEB-INF/clubs.jsp");
             
         }else{
             

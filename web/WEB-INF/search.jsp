@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="headerIncludes.jsp" >
+<jsp:include page="/headerIncludes.jsp" >
     <jsp:param name="title" value="Search" />
 </jsp:include>
 
@@ -30,4 +30,4 @@
 
 
 
-<jsp:include page="footerIncludes.jsp"/>
+<jsp:include page="/footerIncludes.jsp"/>

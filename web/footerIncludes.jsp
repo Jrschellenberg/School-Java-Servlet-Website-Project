@@ -8,6 +8,6 @@
 
     </body>
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.min.js"> </script>
-    <script src="js/main.js"></script>
+    <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"> </script>
+    <script src="<%=request.getContextPath()%>/js/main.js"></script>
 </html>

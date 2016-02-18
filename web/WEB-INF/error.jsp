@@ -1,4 +1,4 @@
-<jsp:include page="headerIncludes.jsp" >
+<jsp:include page="/headerIncludes.jsp" >
     <jsp:param name="title" value="Error !" />
 </jsp:include>
 
@@ -28,4 +28,4 @@
 
 
 
-<jsp:include page="footerIncludes.jsp"/>
+<jsp:include page="/footerIncludes.jsp"/>

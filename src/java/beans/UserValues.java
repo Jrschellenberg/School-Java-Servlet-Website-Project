@@ -9,13 +9,15 @@ package beans;
  * @author Christopher
  */
 public class UserValues {
-    
+    private volatile static UserValues uniqueInstance;
     private String msg;
     private String username;
     private String password;    
 
     public UserValues() {
+        msg = "";
     }
+
     
     public String getMsg() {
         return msg;

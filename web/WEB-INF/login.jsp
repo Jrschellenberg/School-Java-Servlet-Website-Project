@@ -1,4 +1,4 @@
-<jsp:include page="headerIncludes.jsp" >
+<jsp:include page="/headerIncludes.jsp" >
     <jsp:param name="title" value="Login" />
 </jsp:include>
 
@@ -28,7 +28,7 @@
                     <% }%>
                     
                     <% if(request.getSession().getAttribute("username") == null){ %>
-                    <form id="login" action="Controller" method="GET" enctype="text/plain">
+                    <form id="login" action="<%=request.getContextPath()%>/Controller" method="POST">
 
                         <label for="username">Username:</label>
                         <input type="text" name="username" id="username" size="20" value="<%out.write(s);%>" /><br />
@@ -36,7 +36,7 @@
                         <input type="password" name="password" id="password" size="20" /><br />
 
 
-                        <input type="submit" name="action" value="Login" />
+                        <input type="submit" name="action" id="action" value="Login" />
                     </form>
                     <%}%>
                     
@@ -53,4 +53,4 @@
 
 
 
-<jsp:include page="footerIncludes.jsp"/>
+<jsp:include page="/footerIncludes.jsp"/>

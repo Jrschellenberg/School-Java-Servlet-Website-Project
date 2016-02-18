@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="headerIncludes.jsp" >
+<jsp:include page="/headerIncludes.jsp" >
     <jsp:param name="title" value="Players" />
 </jsp:include>
 
@@ -20,4 +20,4 @@
 <h1> Players Nation ...<jsp:getProperty name="playerValues" property="playerNation" /></h1>
 <% } %>
 
-<jsp:include page="footerIncludes.jsp"/>
+<jsp:include page="/footerIncludes.jsp"/>

@@ -1,4 +1,4 @@
-<jsp:include page="headerIncludes.jsp" >
+<jsp:include page="/headerIncludes.jsp" >
     <jsp:param name="title" value="Register" />
 </jsp:include>
 
@@ -17,7 +17,7 @@
                     <h2><jsp:getProperty name="vObj" property="msg" /></h2>
                     <% }%>
                     
-                    <form id="register" action="Controller" method="GET" enctype="text/plain">
+                    <form id="register" action="Controller" method="POST">
                         <label for="username">Username:</label>
                         <input type="text" name="username" id="username" size="20" /><br />
                         <label for="Password">Password:</label>
@@ -37,4 +37,4 @@
             
     </div>
 
-<jsp:include page="footerIncludes.jsp"/>
+<jsp:include page="/footerIncludes.jsp"/>

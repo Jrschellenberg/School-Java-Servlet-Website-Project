@@ -1,8 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="headerIncludes.jsp" >
-    <jsp:param name="title" value="Leagues" />
+<jsp:include page="/headerIncludes.jsp" >
+    <jsp:param name="title" value="Clubs" />
 </jsp:include>
-
 
 <div class="container-fluid"> 
 
@@ -15,18 +14,12 @@
                     <br style="clear: left;" />
                     
                     
-                    <% if (request.getParameter("l") == null){ %>
-                    Leagues:
-                    <c:forEach var="l" items="${leagues}">
-                        <h1><a href="<%=request.getContextPath()%>/leagues?l=${l.leagueId}">${l.leagueName}</a></h1>
-                    </c:forEach>
-                        <% }else{ %>
-                    <br />
+                    <% if (request.getParameter("c") == null){ %>
                     Clubs:
                     <c:forEach var="c" items="${clubs}">
                         <h1><a href="<%=request.getContextPath()%>/clubs?c=${c.clubId}">${c.clubName}</a></h1>
                     </c:forEach>
-                    <br />
+                        <% }else{ %>
                     players:
                     <c:forEach var="p" items="${players}">
                         <h1><a href="<%=request.getContextPath()%>/players?p=${p.playerId}">${p.playerName}</a></h1>
@@ -44,5 +37,4 @@
             
     </div>
 
-
-<jsp:include page="footerIncludes.jsp"/>
+<jsp:include page="/footerIncludes.jsp"/>

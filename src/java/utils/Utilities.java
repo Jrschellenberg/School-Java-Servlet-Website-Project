@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets;
+package utils;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,6 +37,12 @@ public class Utilities {
     throws ServletException, IOException{
         RequestDispatcher rd = request.getRequestDispatcher(url);
         rd.forward(request, response);
+    }
+    
+    public void includeRequest(HttpServletRequest request, HttpServletResponse response, String url)
+    throws ServletException, IOException{
+        RequestDispatcher rd = request.getRequestDispatcher(url);
+        rd.include(request, response);
     }
 
 }

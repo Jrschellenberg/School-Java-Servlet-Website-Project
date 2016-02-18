@@ -5,24 +5,20 @@
  */
 package servlets;
 
-import utils.DBUtilities;
-import utils.Utilities;
+import beans.UserValues;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import beans.PlayerValues;
-import java.util.ArrayList;
+import utils.Utilities;
+
 /**
  *
  * @author Justin
  */
-public class PlayerServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,32 +28,22 @@ public class PlayerServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.lang.ClassNotFoundException
-     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
-        DBUtilities playerDB = DBUtilities.getInstance();
-        PlayerValues nValues = new PlayerValues();
-        ArrayList<PlayerValues> allPlayers = new  ArrayList<PlayerValues>();
-        Utilities util = new Utilities();
-              
-        String playerID = request.getParameter("p");
-        if(playerID == null){
-            
-            allPlayers = playerDB.allPlayers();
-            request.setAttribute("allplayers", allPlayers);
-           
-        }
-        else{
-            nValues = playerDB.playerStats(playerID);
-            request.setAttribute("playerValues", nValues);
-        }
-        
-        
-        util.forwardRequest(request, response, "/WEB-INF/players.jsp");
-        
+            throws ServletException, IOException {
 
+        Utilities util = new Utilities();
+//        UserValues uValues = new UserValues();
+//        if(uValues.getMsg().equals("")){
+//            uValues.setMsg("Welcome to Shoot 24! Please enter your username and password. If you don't have one Please register and join!");
+//        }
+//        
+//        request.setAttribute ("vObj", uValues);
+//        
+        util.forwardRequest(request, response, "WEB-INF/login.jsp");
+        
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -72,13 +58,7 @@ public class PlayerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PlayerServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(PlayerServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -92,13 +72,7 @@ public class PlayerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PlayerServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(PlayerServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
