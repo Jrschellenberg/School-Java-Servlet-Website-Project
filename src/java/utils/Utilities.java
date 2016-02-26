@@ -20,6 +20,22 @@ import javax.servlet.http.HttpServletResponse;
  * @author Justin
  */
 public class Utilities {
+    
+    private volatile static Utilities uniqueInstance;
+    
+    
+    public static Utilities getInstance(){
+    if(uniqueInstance == null){
+        synchronized(Utilities.class){
+            if(uniqueInstance == null){
+                uniqueInstance = new Utilities();
+            }
+        }
+
+    }
+    return uniqueInstance;
+    }
+    
 
     public boolean foundCookie(String target, Cookie[] cookies) {
         if (cookies != null) {

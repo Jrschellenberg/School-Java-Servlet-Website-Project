@@ -40,7 +40,7 @@ public class PlayerServlet extends HttpServlet {
         DBUtilities playerDB = DBUtilities.getInstance();
         PlayerValues nValues = new PlayerValues();
         ArrayList<PlayerValues> allPlayers = new  ArrayList<PlayerValues>();
-        Utilities util = new Utilities();
+        Utilities util = Utilities.getInstance();
               
         String playerID = request.getParameter("p");
         if(playerID == null){

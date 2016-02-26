@@ -7,7 +7,7 @@ package servlets;
 
 import utils.DBUtilities;
 import utils.Utilities;
-import beans.ErrorMassage;
+import beans.ErrorMessage;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -43,9 +43,9 @@ public class NationServlet extends HttpServlet {
 
         ArrayList<NationValues> nationValues = new  ArrayList<NationValues>();
         ArrayList<PlayerValues> playersValues = new  ArrayList<PlayerValues>();
-        ErrorMassage massage = new ErrorMassage();
+        ErrorMessage message = new ErrorMessage();
         
-        Utilities util = new Utilities();
+        Utilities util = Utilities.getInstance();
               
         String nationId = request.getParameter("n");
         
@@ -64,8 +64,8 @@ public class NationServlet extends HttpServlet {
             
         }else{
             
-             massage.setMsg("Sorry No results found !");
-             request.setAttribute("ErrorMassage", massage);
+             message.setMsg("Sorry No results found !");
+             request.setAttribute("ErrorMessage", message);
              util.forwardRequest(request, response, "/WEB-INF/error.jsp");
              
         }

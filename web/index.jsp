@@ -32,6 +32,9 @@
                 <div class="text-center">  
                     <form id="search" action="<%=request.getContextPath()%>/Search" method="GET" enctype="text/plain" class="navbar-form">
                         <div class="sf_search" style="padding: 10px 0 10px 0;">
+                            <%if(request.getSession().getAttribute("username") !=null){%>
+                            <h1>Hey <%out.write(request.getSession().getAttribute("username").toString());%></h1>
+                            <%}%>
                             <input  class="sf_input" type="text" name="q" id="q" value="Search Your Favorite Player" style="font-size:16pt;width:400px;height:30px;text-align: center">   
                         </div>
                     </form>

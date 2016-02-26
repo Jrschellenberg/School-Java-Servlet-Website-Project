@@ -5,7 +5,7 @@
  */
 package servlets;
 
-import beans.ErrorMassage;
+import beans.ErrorMessage;
 import beans.UserValues;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,11 +40,11 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(60*60*5);//Set time to invalidate to 5 hours 
         UserValues valueObject = new UserValues();
-        Utilities util = new Utilities();
-        ErrorMassage eMsg = new ErrorMassage();
+        Utilities util = Utilities.getInstance();
+        ErrorMessage eMsg = new ErrorMessage();
         DBUtilities dbLogin = DBUtilities.getInstance();
-        eMsg.setMsg("Sorry but we encountered an error!");
-        request.setAttribute("ErrorMassage", eMsg);
+        eMsg.setMsg("Sorry but we encountered an error Trying to log you in!");
+        request.setAttribute("ErrorMessage", eMsg);
         
         String action = request.getParameter("action");
         if (action == null) {
@@ -74,18 +74,21 @@ public class LoginServlet extends HttpServlet {
 
                 valueObject.setMsg("The username and/or password you supplied do not match our records. :(");
             }
-
+            //session.setAttribute("vObj", valueObject);
             request.setAttribute("vObj", valueObject);
             //response.sendRedirect(request.getContextPath()+"/Login");
             util.forwardRequest(request, response, "WEB-INF/login.jsp");
         }
                 //Logout Processing 
         else if (action.equals("Logout")) {
-          
-            session.invalidate();
+            
+            //??which one
+           session.invalidate();
+           // session.removeAttribute("username");
+           // session.removeAttribute("admin");
 
             valueObject.setMsg("Thanks For Visiting!! you have successfully logged out");
-
+            //session.setAttribute("vObj", valueObject);
             request.setAttribute("vObj", valueObject);
             //response.sendRedirect(request.getContextPath()+"/Login");
             util.forwardRequest(request, response, "WEB-INF/login.jsp");

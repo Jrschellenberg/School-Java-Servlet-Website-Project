@@ -19,7 +19,7 @@
     <li class="special"><a href="<%=request.getContextPath()%>/Register">Register</a></li>
     <%}%>
     <% if(request.getSession().getAttribute("admin") != null){ %>
-    <li class="special"><a href="adminpage">Admin Page</a></li>
+    <li class="special"><a href="<%=request.getContextPath()%>/Admin">Admin</a></li>
     <%}%>
     
     

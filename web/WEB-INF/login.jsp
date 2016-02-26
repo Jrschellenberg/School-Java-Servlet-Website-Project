@@ -1,3 +1,6 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page errorPage="/error.jsp" %>
+
 <jsp:include page="/headerIncludes.jsp" >
     <jsp:param name="title" value="Login" />
 </jsp:include>

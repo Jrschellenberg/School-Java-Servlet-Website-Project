@@ -7,7 +7,7 @@ package servlets;
 
 import utils.DBUtilities;
 import utils.Utilities;
-import beans.ErrorMassage;
+import beans.ErrorMessage;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -42,17 +42,17 @@ public class SearchServlet extends HttpServlet {
         DBUtilities searchDB = DBUtilities.getInstance();
       
          ArrayList<PlayerValues> nValues = new  ArrayList<PlayerValues>();
-        ErrorMassage massage = new ErrorMassage();
+        ErrorMessage message = new ErrorMessage();
         
-        Utilities util = new Utilities();
+        Utilities util = Utilities.getInstance();
               
         String playerName = request.getParameter("q");
         
         if(playerName == null){
             
              
-             massage.setMsg("Please Use the search box at the top to search for a player !");
-             request.setAttribute("ErrorMassage", massage);
+             message.setMsg("Please Use the search box at the top to search for a player !");
+             request.setAttribute("ErrorMessage", message);
              util.forwardRequest(request, response, "/WEB-INF/error.jsp");
              
         }
@@ -62,8 +62,8 @@ public class SearchServlet extends HttpServlet {
             util.forwardRequest(request, response, "/WEB-INF/search.jsp");
         }else{
             
-             massage.setMsg("Sorry No results found !");
-             request.setAttribute("ErrorMassage", massage);
+             message.setMsg("Sorry No results found !");
+             request.setAttribute("ErrorMessage", message);
              util.forwardRequest(request, response, "/WEB-INF/error.jsp");
         }
         

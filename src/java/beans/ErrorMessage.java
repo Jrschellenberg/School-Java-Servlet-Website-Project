@@ -4,11 +4,11 @@ package beans;
  *
  * @author Christopher
  */
-public class ErrorMassage {
+public class ErrorMessage {
     
     private String msg;
 
-    public ErrorMassage() {
+    public ErrorMessage() {
         msg="";
     }
     

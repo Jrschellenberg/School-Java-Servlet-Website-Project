@@ -1,6 +1,11 @@
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page isErrorPage="true" %>
 <jsp:include page="/headerIncludes.jsp" >
     <jsp:param name="title" value="Error !" />
 </jsp:include>
+
+
 
     <div class="container-fluid"> 
 
@@ -12,8 +17,8 @@
                 <div style="margin: 0 auto;width:1000px">
                     <br style="clear: left;" />
 
-                    <jsp:useBean id="ErrorMassage" type="beans.ErrorMassage" scope="request" />
-                    <h1><jsp:getProperty name="ErrorMassage" property="msg" /></h1>
+                    <jsp:useBean id="ErrorMessage" type="beans.ErrorMessage" scope="request" />
+                    <h1><jsp:getProperty name="ErrorMessage" property="msg" /></h1>
                     
                     <br /><br />
                     <br style="clear: left;" />

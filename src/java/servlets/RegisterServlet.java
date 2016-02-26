@@ -5,7 +5,7 @@
  */
 package servlets;
 
-import beans.ErrorMassage;
+import beans.ErrorMessage;
 import beans.UserValues;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,8 +42,8 @@ public class RegisterServlet extends HttpServlet {
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(60*60*5);//Set time to invalidate to 5 hours 
         UserValues valueObject = new UserValues();
-        Utilities util = new Utilities();
-        ErrorMassage eMsg = new ErrorMassage();
+        Utilities util = Utilities.getInstance();
+        ErrorMessage eMsg = new ErrorMessage();
         DBUtilities dbLogin = DBUtilities.getInstance();
         eMsg.setMsg("Sorry but we encountered an error!");
         request.setAttribute("ErrorMassage", eMsg);
@@ -59,7 +59,7 @@ public class RegisterServlet extends HttpServlet {
             String par_username = request.getParameter("username");
             String par_password = request.getParameter("password");
 
-            if (par_username == null || par_password == null || par_username.equals("") || par_password.equals("")) {
+            if (par_username == null || par_password == null || par_username.trim().equals("") || par_password.trim().equals("")) {
                 valueObject.setMsg("Please fill in the username and password fields!");
             } else if (dbLogin.usernameExist(par_username)) {
 

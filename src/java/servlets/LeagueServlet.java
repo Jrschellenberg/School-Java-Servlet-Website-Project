@@ -7,7 +7,7 @@ package servlets;
 
 import utils.DBUtilities;
 import utils.Utilities;
-import beans.ErrorMassage;
+import beans.ErrorMessage;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -44,9 +44,9 @@ public class LeagueServlet extends HttpServlet {
         ArrayList<LeagueValues> LeagueValues = new  ArrayList<LeagueValues>();
         ArrayList<ClubValues> clubsValues = new  ArrayList<ClubValues>();
         ArrayList<PlayerValues> playersValues = new  ArrayList<PlayerValues>();
-        ErrorMassage massage = new ErrorMassage();
+        ErrorMessage message = new ErrorMessage();
         
-        Utilities util = new Utilities();
+        Utilities util = Utilities.getInstance();
               
         String leagueId = request.getParameter("l");
         
@@ -67,8 +67,8 @@ public class LeagueServlet extends HttpServlet {
             util.forwardRequest(request, response, "/WEB-INF/leagues.jsp");
         }else{
             
-             massage.setMsg("Sorry No results found !");
-             request.setAttribute("ErrorMassage", massage);
+             message.setMsg("Sorry No results found !");
+             request.setAttribute("ErrorMessage", message);
              util.forwardRequest(request, response, "/WEB-INF/error.jsp");
              
         }
