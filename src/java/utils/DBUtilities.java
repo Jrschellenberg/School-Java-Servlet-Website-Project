@@ -569,4 +569,17 @@ public class DBUtilities {
         return "";
     }
 
+    public int addAdminUser(String username) throws ClassNotFoundException, SQLException {
+
+        int result = DBconnection.db.insert("UPDATE users SET User_type=0 WHERE User_username='" + username + "';");
+        return result;
+
+    }
+
+    public int removeAdminUser(String username) throws ClassNotFoundException, SQLException {
+
+        int result = DBconnection.db.insert("UPDATE users SET User_type=1 WHERE User_username='" + username + "';");
+        return result;
+
+    }
 }

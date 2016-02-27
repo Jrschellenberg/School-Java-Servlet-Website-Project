@@ -32,6 +32,12 @@
             <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#retrievePassword">
                 Retrieve User Pass
             </button>
+            <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#addAdmin">
+                Add Admin User
+            </button>
+            <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#removeAdmin">
+                Remove Admin User
+            </button>
 
 
 
@@ -45,7 +51,10 @@
     </div>
 
 </div>
+<jsp:include page="/ModalIncludes/removeUser.jsp" ></jsp:include>
+<jsp:include page="/ModalIncludes/removeAdmin.jsp" ></jsp:include>
+<jsp:include page="/ModalIncludes/addAdmin.jsp" ></jsp:include>
 <jsp:include page="/ModalIncludes/getUserPassword.jsp" ></jsp:include>
 <jsp:include page="/ModalIncludes/addUser.jsp" ></jsp:include>
-<jsp:include page="/ModalIncludes/removeUser.jsp" ></jsp:include>
+
 <jsp:include page="/footerIncludes.jsp"/>

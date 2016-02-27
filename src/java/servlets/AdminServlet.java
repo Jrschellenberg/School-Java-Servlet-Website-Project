@@ -57,10 +57,13 @@ public class AdminServlet extends HttpServlet {
             eMsg.setMsg("You tried Accessing Admin page without Admin Rights! Please try again");
             request.setAttribute("ErrorMessage", eMsg);
             util.forwardRequest(request, response, "WEB-INF/error.jsp");
-        } //Removing Users Functionality.
-        else if (action == null) {
+        } 
+        else if (action == null) {          //If user Visiting /Admin page via Admin Link.
             adminMsg.setMsg("Welcome Admin. Please pick an Option to do!");
-        } else if (action.equals("removeUser")) {   //Checks if user making request is an admin. if the form was filled and not white space.
+        } 
+        
+        //Removing Users Functionality.
+        else if (action.equals("removeUser")) {   //Checks if user making request is an admin. if the form was filled and not white space.
             String user = request.getParameter("removeUser");
             if (user != null && !user.trim().equals("")) {
                 if (adminDB.usernameExist(user)) { //checking if username entered exists
@@ -120,7 +123,55 @@ public class AdminServlet extends HttpServlet {
             }               
         }//End of Get user Password Functionality.
         
-        //Start 
+        //Start addAdmin Functionality
+        else if(action.equals("addAdmin")){
+            String addAdmin = request.getParameter("addAdmin");
+            if(addAdmin != null && !addAdmin.trim().equals("")){
+                if(adminDB.usernameExist(addAdmin)){
+                    if(!adminDB.userTypeAdmin(addAdmin)){
+                        if(adminDB.addAdminUser(addAdmin) ==1){
+                            adminMsg.setMsg("You Sucessfully made "+addAdmin+" a user with Administration rights");
+                        }else{
+                            adminMsg.setMsg("Sorry but an error occured trying to make "+addAdmin+" an admin...");
+                        }
+                    }else{
+                        adminMsg.setMsg("Sorry but that username is already an Admin!");
+                    }
+                    //make Admin
+                }else{
+                    adminMsg.setMsg("Sorry but that username doesn't exist!");
+                }
+            }
+            else{
+                adminMsg.setMsg("Please Fill in the Username Form to continue");
+            }           
+        } // End addAdmin Functionality.
+        
+        //Start removeAdmin functionality.
+        else if(action.equals("removeAdmin")){
+            String removeAdmin = request.getParameter("removeAdmin");
+            if(removeAdmin != null && !removeAdmin.trim().equals("")){
+                if(adminDB.usernameExist(removeAdmin)){
+                    if(adminDB.userTypeAdmin(removeAdmin)){
+                        if(adminDB.removeAdminUser(removeAdmin)==1){
+                            adminMsg.setMsg("You Sucessfully took away "+removeAdmin+"'s Administration rights");
+                        }else{
+                            adminMsg.setMsg("Sorry but an error occured trying to take away "+removeAdmin+"'s admin rights...");
+                        }
+                    }else{
+                        adminMsg.setMsg("Sorry but that username is already a regular user!");
+                    }
+                    
+                }else{
+                    adminMsg.setMsg("Sorry but that username doesn't exist!");
+                }
+                
+                
+            }
+            else{
+                adminMsg.setMsg("Please Fill in the Username Form to continue");
+            }
+        }//End of Remove Admin Functionality
         
         
         request.setAttribute("adminMessage", adminMsg);
