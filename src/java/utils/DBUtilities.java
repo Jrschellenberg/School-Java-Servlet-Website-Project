@@ -582,4 +582,44 @@ public class DBUtilities {
         return result;
 
     }
+
+    public boolean playerExist(String name) throws ClassNotFoundException, SQLException {
+
+        ResultSet resultSet = DBconnection.db.query("SELECT * FROM players WHERE player_name='" + name + "';");
+
+        while (resultSet.next()) {
+            return true;
+        }
+        return false;
+    }
+
+    public int addPlayer(String nation, String club, String playerName, String birthday, String picture, String position, String height, String number, String foot) throws ClassNotFoundException, SQLException {
+
+        int result = DBconnection.db.insert("INSERT INTO players (`Player_nation_id`, `Player_club_id`, `Player_name`, `Player_birthday`, `Player_picture`, `Player_position`, `Player_height`, `Player_number`, `Player_foot`)"
+                + "VALUES(" + nation + ", " + club + ", '" + playerName + "', '" + birthday + "', '" + picture + "', '" + position + "', " + height + " , " + number + " , '" + foot + "');");
+        return result;
+
+    }
+
+    public String getNationId(String nation) throws ClassNotFoundException, SQLException {
+
+        ResultSet resultSet = DBconnection.db.query("SELECT Nation_id FROM nations WHERE Nation_name='" + nation + "';");
+
+        while (resultSet.next()) {
+            return resultSet.getString("Nation_id");
+        }
+
+        return "";
+    }
+
+    public String getClubId(String club) throws ClassNotFoundException, SQLException {
+
+        ResultSet resultSet = DBconnection.db.query("SELECT Club_id FROM clubs WHERE Club_name='" + club + "';");
+
+        while (resultSet.next()) {
+            return resultSet.getString("Club_id");
+        }
+
+        return "";
+    }
 }

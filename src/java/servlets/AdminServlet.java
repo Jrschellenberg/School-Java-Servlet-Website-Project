@@ -6,10 +6,13 @@
 package servlets;
 
 import beans.AdminValues;
+import beans.ClubValues;
 import beans.ErrorMessage;
+import beans.NationValues;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -47,8 +50,17 @@ public class AdminServlet extends HttpServlet {
         Utilities util = Utilities.getInstance();
         AdminValues adminMsg = new AdminValues();
         adminMsg.setMsg("Welcome Admin!");
+        ArrayList<NationValues> nationValues = new  ArrayList<NationValues>();
+        ArrayList<ClubValues> clubsValues = new  ArrayList<ClubValues>();
+        nationValues = adminDB.allNations();
+        clubsValues = adminDB.allClubs();
+        request.setAttribute("nations", nationValues);
+        request.setAttribute("clubs", clubsValues);
+        
+        
+        
+        
         String action = request.getParameter("action");
-        String removeUser = request.getParameter("removeUser");
         HttpSession session = request.getSession();
         if (session.getAttribute("admin") == null) { //First Check to determine if user Accessing this page is an admin or not. Security check.
             ErrorMessage eMsg = new ErrorMessage();
@@ -137,6 +149,30 @@ public class AdminServlet extends HttpServlet {
             }
 
         }//End of Remove Admin Functionality
+        
+        //start of Add Player Functionality
+        else if(action.equals("addPlayer")){
+            String addPlayerName = request.getParameter("addPlayerFirstName")+" "+request.getParameter("addPlayerLastName");
+            if(!adminDB.playerExist(addPlayerName)){ // If player name doesn't exist
+                String addPlayerDate = request.getParameter("addPlayerDate");
+                String addPlayerClub = adminDB.getClubId(request.getParameter("addPlayerClub"));
+                String addPlayerNation = adminDB.getNationId(request.getParameter("addPlayerNation"));
+                String addPlayerPicture = request.getParameter("addPlayerFirstName")+"-"+request.getParameter("addPlayerLastName")+".png";
+                String addPlayerPosition = request.getParameter("addPlayerPosition");
+                String addPlayerHeight = request.getParameter("addPlayerHeight");
+                String addPlayerNumber = request.getParameter("addPlayerNumber");
+                String addPlayerFoot = request.getParameter("addPlayerFoot");
+                if(adminDB.addPlayer(addPlayerNation, addPlayerClub, addPlayerName, addPlayerDate, addPlayerPicture, addPlayerPosition, addPlayerHeight, addPlayerNumber, addPlayerFoot)==1){
+                    adminMsg.setMsg("You Sucessfully added "+addPlayerName+" To the database");
+                }else{
+                    adminMsg.setMsg("Sorry but an error occured adding "+addPlayerName+" To the database");
+                }
+                
+                
+            }else{
+                adminMsg.setMsg("Sorry but that Player is already entered in the database!");
+            }       
+        }//End of Add Player Functionality.
 
         request.setAttribute("adminMessage", adminMsg);
         util.forwardRequest(request, response, "WEB-INF/admin.jsp");

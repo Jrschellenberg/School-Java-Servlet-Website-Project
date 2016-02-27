@@ -32,9 +32,10 @@
                     
                     <% if(request.getSession().getAttribute("username") == null){ %>
                     <form id="login" action="<%=request.getContextPath()%>/Login" method="POST">
-
+                        <div>
                         <label for="username">Username:</label>
-                        <input type="text" name="username" id="username" size="20" value="<%out.write(s);%>" /><br />
+                        <input type="text" name="username" id="username" size="20" value="<%out.write(s);%>"  />
+                        </div><br />
                         <label for="Password">Password:</label>
                         <input type="password" name="password" id="password" size="20" /><br />
 

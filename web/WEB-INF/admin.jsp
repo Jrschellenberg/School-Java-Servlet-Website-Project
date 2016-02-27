@@ -38,6 +38,9 @@
             <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#removeAdmin">
                 Remove Admin User
             </button>
+            <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#addPlayer">
+                Add Player
+            </button>
 
 
 
@@ -56,5 +59,6 @@
 <jsp:include page="/ModalIncludes/addAdmin.jsp" ></jsp:include>
 <jsp:include page="/ModalIncludes/getUserPassword.jsp" ></jsp:include>
 <jsp:include page="/ModalIncludes/addUser.jsp" ></jsp:include>
+<jsp:include page="/ModalIncludes/addPlayer.jsp" ></jsp:include>
 
 <jsp:include page="/footerIncludes.jsp"/>
