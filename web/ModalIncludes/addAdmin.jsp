@@ -14,9 +14,9 @@
             <div class="modal-body">
                 <form class="form-horizontal" action="<%=request.getContextPath()%>/Admin" method="POST">
                     <div class="form-group">
-                        <label for="removeUser" class="col-sm-2 control-label">Make this user Admin:</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="removeUser" name="addAdmin" placeholder="Username">
+                        <label for="removeUser" class="col-sm-6 control-label">Make this user Admin:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="removeUser" name="addAdmin" placeholder="Username" data-validation="length" data-validation-length="2-30">
                         </div>
                     </div>
                     
