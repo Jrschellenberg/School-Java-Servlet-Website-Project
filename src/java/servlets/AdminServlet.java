@@ -9,6 +9,7 @@ import beans.AdminValues;
 import beans.ClubValues;
 import beans.ErrorMessage;
 import beans.NationValues;
+import beans.PlayerValues;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -50,16 +51,16 @@ public class AdminServlet extends HttpServlet {
         Utilities util = Utilities.getInstance();
         AdminValues adminMsg = new AdminValues();
         adminMsg.setMsg("Welcome Admin!");
-        ArrayList<NationValues> nationValues = new  ArrayList<NationValues>();
-        ArrayList<ClubValues> clubsValues = new  ArrayList<ClubValues>();
+        ArrayList<NationValues> nationValues = new ArrayList<NationValues>();
+        ArrayList<ClubValues> clubsValues = new ArrayList<ClubValues>();
+        ArrayList<PlayerValues> allPlayers = new ArrayList<PlayerValues>();
+        allPlayers = adminDB.allPlayers();
         nationValues = adminDB.allNations();
         clubsValues = adminDB.allClubs();
         request.setAttribute("nations", nationValues);
         request.setAttribute("clubs", clubsValues);
-        
-        
-        
-        
+        request.setAttribute("players", allPlayers);
+
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
         if (session.getAttribute("admin") == null) { //First Check to determine if user Accessing this page is an admin or not. Security check.
@@ -76,11 +77,13 @@ public class AdminServlet extends HttpServlet {
                 if (adminDB.userTypeAdmin(user)) { //if does exist making sure user being deleted is NOT ADMIN.
                     adminMsg.setMsg("Sorry but the user " + user + " you tried deleting is an admin!");
                 } else // adminDB.removeUser(user);
-                 if (adminDB.removeUser(user) == 1) {
+                {
+                    if (adminDB.removeUser(user) == 1) {
                         adminMsg.setMsg("You have sucessfully Deleted " + user + " From the database.");
                     } else {
                         adminMsg.setMsg("An error occured In Deleting " + user + " From the database");
                     }
+                }
             } else {
                 adminMsg.setMsg("The userName you supplied was invalid");
             }
@@ -149,30 +152,76 @@ public class AdminServlet extends HttpServlet {
             }
 
         }//End of Remove Admin Functionality
-        
         //start of Add Player Functionality
-        else if(action.equals("addPlayer")){
-            String addPlayerName = request.getParameter("addPlayerFirstName")+" "+request.getParameter("addPlayerLastName");
-            if(!adminDB.playerExist(addPlayerName)){ // If player name doesn't exist
+        else if (action.equals("addPlayer")) {
+            String addPlayerName = request.getParameter("addPlayerFirstName") + " " + request.getParameter("addPlayerLastName");
+            if (!adminDB.playerExist(addPlayerName)) { // If player name doesn't exist
                 String addPlayerDate = request.getParameter("addPlayerDate");
                 String addPlayerClub = adminDB.getClubId(request.getParameter("addPlayerClub"));
                 String addPlayerNation = adminDB.getNationId(request.getParameter("addPlayerNation"));
-                String addPlayerPicture = request.getParameter("addPlayerFirstName")+"-"+request.getParameter("addPlayerLastName")+".png";
+                String addPlayerPicture = request.getParameter("addPlayerFirstName") + "-" + request.getParameter("addPlayerLastName") + ".png";
                 String addPlayerPosition = request.getParameter("addPlayerPosition");
                 String addPlayerHeight = request.getParameter("addPlayerHeight");
                 String addPlayerNumber = request.getParameter("addPlayerNumber");
                 String addPlayerFoot = request.getParameter("addPlayerFoot");
-                if(adminDB.addPlayer(addPlayerNation, addPlayerClub, addPlayerName, addPlayerDate, addPlayerPicture, addPlayerPosition, addPlayerHeight, addPlayerNumber, addPlayerFoot)==1){
-                    adminMsg.setMsg("You Sucessfully added "+addPlayerName+" To the database");
-                }else{
-                    adminMsg.setMsg("Sorry but an error occured adding "+addPlayerName+" To the database");
+                if (adminDB.addPlayer(addPlayerNation, addPlayerClub, addPlayerName, addPlayerDate, addPlayerPicture, addPlayerPosition, addPlayerHeight, addPlayerNumber, addPlayerFoot) == 1) {
+                    adminMsg.setMsg("You Sucessfully added " + addPlayerName + " To the database");
+                } else {
+                    adminMsg.setMsg("Sorry but an error occured adding " + addPlayerName + " To the database");
                 }
-                
-                
-            }else{
+                allPlayers = adminDB.allPlayers();
+                request.setAttribute("players", allPlayers);
+
+            } else {
                 adminMsg.setMsg("Sorry but that Player is already entered in the database!");
-            }       
+            }
+            nationValues = adminDB.allNations();
+            clubsValues = adminDB.allClubs();
+            request.setAttribute("nations", nationValues);
+            request.setAttribute("clubs", clubsValues);
+
         }//End of Add Player Functionality.
+        //Start Edit Player Functionality.
+        else if (action.equals("editPlayer")) {
+            String editPlayerName = request.getParameter("editPlayerName");
+            String editPlayerDate = request.getParameter("editPlayerDate");
+            String editPlayerClub = adminDB.getClubId(request.getParameter("editPlayerClub"));
+            String editPlayerNation = adminDB.getNationId(request.getParameter("editPlayerNation"));
+            String editPlayerPicture = adminDB.getPlayerPicture(editPlayerName);
+            String editPlayerPosition = request.getParameter("editPlayerPosition");
+            String editPlayerHeight = request.getParameter("editPlayerHeight");
+            String editPlayerNumber = request.getParameter("editPlayerNumber");
+            String editPlayerFoot = request.getParameter("editPlayerFoot");
+
+            if (adminDB.editPlayer(editPlayerNation, editPlayerClub, editPlayerName, editPlayerDate, editPlayerPicture, editPlayerPosition, editPlayerHeight, editPlayerNumber, editPlayerFoot) == 1) {
+                adminMsg.setMsg("Successfully updated " + editPlayerName + " in the database");
+            } else {
+                adminMsg.setMsg("Sorry but an error occured updating " + editPlayerName + " in the database");
+            }
+            
+               // adminMsg.setMsg("PlayerName: "+editPlayerName+"\n PlayerDate: "+ editPlayerDate+"\n PlayerClub: "+editPlayerClub);
+
+
+
+            nationValues = adminDB.allNations();
+            clubsValues = adminDB.allClubs();
+            request.setAttribute("nations", nationValues);
+            request.setAttribute("clubs", clubsValues);
+
+        }//End of Edit Player Functionality.
+        //Start Remove Player Functionality.
+        else if (action.equals("removePlayer")) {
+            String removePlayer = request.getParameter("removePlayer");
+            if (adminDB.removePlayer(removePlayer) == 1) {
+                adminMsg.setMsg("Successfully Removed " + removePlayer + " From the database");
+
+            } else {
+                adminMsg.setMsg("Sorry but an error occured removing " + removePlayer + " from the database");
+            }
+            allPlayers = adminDB.allPlayers();
+            request.setAttribute("players", allPlayers);
+
+        }
 
         request.setAttribute("adminMessage", adminMsg);
         util.forwardRequest(request, response, "WEB-INF/admin.jsp");

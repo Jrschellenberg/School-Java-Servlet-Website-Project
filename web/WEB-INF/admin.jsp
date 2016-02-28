@@ -41,6 +41,13 @@
             <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#addPlayer">
                 Add Player
             </button>
+            <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#editPlayer">
+                Edit Player
+            </button>
+            <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#removePlayer">
+                Remove Player
+            </button>
+
 
 
 
@@ -54,11 +61,13 @@
     </div>
 
 </div>
-<jsp:include page="/ModalIncludes/removeUser.jsp" ></jsp:include>
-<jsp:include page="/ModalIncludes/removeAdmin.jsp" ></jsp:include>
-<jsp:include page="/ModalIncludes/addAdmin.jsp" ></jsp:include>
-<jsp:include page="/ModalIncludes/getUserPassword.jsp" ></jsp:include>
-<jsp:include page="/ModalIncludes/addUser.jsp" ></jsp:include>
-<jsp:include page="/ModalIncludes/addPlayer.jsp" ></jsp:include>
+<jsp:include page="/WEB-INF/ModalIncludes/removeUser.jsp" ></jsp:include>
+<jsp:include page="/WEB-INF/ModalIncludes/removeAdmin.jsp" ></jsp:include>
+<jsp:include page="/WEB-INF/ModalIncludes/addAdmin.jsp" ></jsp:include>
+<jsp:include page="/WEB-INF/ModalIncludes/getUserPassword.jsp" ></jsp:include>
+<jsp:include page="/WEB-INF/ModalIncludes/addUser.jsp" ></jsp:include>
+<jsp:include page="/WEB-INF/ModalIncludes/addPlayer.jsp" ></jsp:include>
+<jsp:include page="/WEB-INF/ModalIncludes/editPlayer.jsp" ></jsp:include>
+<jsp:include page="/WEB-INF/ModalIncludes/removePlayer.jsp" ></jsp:include>
 
 <jsp:include page="/footerIncludes.jsp"/>

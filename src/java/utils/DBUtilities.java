@@ -622,4 +622,31 @@ public class DBUtilities {
 
         return "";
     }
+
+    public String getPlayerPicture(String name) throws ClassNotFoundException, SQLException {
+
+        ResultSet resultSet = DBconnection.db.query("SELECT Player_picture FROM players WHERE Player_name='" + name + "';");
+
+        while (resultSet.next()) {
+            return resultSet.getString("Player_picture");
+        }
+
+        return "";
+    }
+
+    public int removePlayer(String name) throws ClassNotFoundException, SQLException {
+
+        int result = DBconnection.db.insert("DELETE FROM players WHERE Player_name='" + name + "';");
+        return result;
+
+    }
+
+    public int editPlayer(String nation, String club, String playerName, String birthday, String picture, String position, String height, String number, String foot) throws ClassNotFoundException, SQLException {
+
+        int result = DBconnection.db.insert("UPDATE players SET Player_nation_id="+nation+", Player_club_id="+club+", Player_birthday='"+birthday+"', "
+                + "Player_picture='"+picture+"', Player_position='"+position+"', Player_height="+height+", Player_number="+number+", Player_foot='"+foot+"' WHERE Player_name='" + playerName + "';");
+        return result;
+
+    }
+
 }
