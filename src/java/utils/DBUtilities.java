@@ -643,10 +643,81 @@ public class DBUtilities {
 
     public int editPlayer(String nation, String club, String playerName, String birthday, String picture, String position, String height, String number, String foot) throws ClassNotFoundException, SQLException {
 
-        int result = DBconnection.db.insert("UPDATE players SET Player_nation_id="+nation+", Player_club_id="+club+", Player_birthday='"+birthday+"', "
-                + "Player_picture='"+picture+"', Player_position='"+position+"', Player_height="+height+", Player_number="+number+", Player_foot='"+foot+"' WHERE Player_name='" + playerName + "';");
+        int result = DBconnection.db.insert("UPDATE players SET Player_nation_id=" + nation + ", Player_club_id=" + club + ", Player_birthday='" + birthday + "', "
+                + "Player_picture='" + picture + "', Player_position='" + position + "', Player_height=" + height + ", Player_number=" + number + ", Player_foot='" + foot + "' WHERE Player_name='" + playerName + "';");
         return result;
 
     }
 
+    public String getLeagueId(String league) throws ClassNotFoundException, SQLException {
+
+        ResultSet resultSet = DBconnection.db.query("SELECT League_id FROM leagues WHERE League_name='" + league + "';");
+
+        while (resultSet.next()) {
+            return resultSet.getString("League_id");
+        }
+
+        return "";
+    }
+
+    public int addLeague(String leagueName) throws ClassNotFoundException, SQLException {
+
+        int result = DBconnection.db.insert(
+                "INSERT INTO leagues (League_name, League_picture) VALUES ('" + leagueName + "','" + leagueName + ".png');"
+        );
+
+        return result;
+    }
+
+    public int removeLeague(String leagueName) throws ClassNotFoundException, SQLException {
+
+        int result = DBconnection.db.insert(
+                "DELETE FROM leagues WHERE League_name='" + leagueName + "';"
+        );
+
+        return result;
+    }
+
+    public int addNation(String nationName) throws ClassNotFoundException, SQLException {
+
+        int result = DBconnection.db.insert(
+                "INSERT INTO nations (Nation_name, Nation_picture) VALUES ('" + nationName + "','" + nationName + ".png');"
+        );
+
+        return result;
+    }
+
+    public int removeNation(String nationName) throws ClassNotFoundException, SQLException {
+
+        int result = DBconnection.db.insert(
+                "DELETE FROM nations WHERE Nation_name='" + nationName + "';"
+        );
+
+        return result;
+    }
+
+    public int addClub(String clubName, String leagueId) throws ClassNotFoundException, SQLException {
+
+        int result = DBconnection.db.insert(
+                "INSERT INTO clubs (Club_league_id, Club_name, Club_picture) VALUES (" + leagueId + ",'" + clubName + "', '" + clubName + ".png');"
+        );
+
+        return result;
+    }
+
+    public int editClub(String clubName, String leagueId) throws ClassNotFoundException, SQLException {
+
+        int result = DBconnection.db.insert("UPDATE clubs SET Club_league_id=" + leagueId + ", Club_name='" + clubName + "' WHERE Club_name='" + clubName + "';");
+
+        return result;
+    }
+
+    public int removeClub(String clubName) throws ClassNotFoundException, SQLException {
+
+        int result = DBconnection.db.insert(
+                "DELETE FROM clubs WHERE Club_name='" + clubName + "';"
+        );
+
+        return result;
+    }
 }

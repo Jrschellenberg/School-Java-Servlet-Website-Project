@@ -47,6 +47,28 @@
             <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#removePlayer">
                 Remove Player
             </button>
+            <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#addLeague">
+                Add League
+            </button>
+            <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#removeLeague">
+                Remove League
+            </button>
+            <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#addNation">
+                Add Nation
+            </button>
+            <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#removeNation">
+                Remove Nation
+            </button>
+            <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#addClub">
+                Add Club
+            </button>
+            <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#editClub">
+                Edit Club
+            </button>
+            <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#removeClub">
+                Remove Club
+            </button>
+
 
 
 
@@ -69,5 +91,12 @@
 <jsp:include page="/WEB-INF/ModalIncludes/addPlayer.jsp" ></jsp:include>
 <jsp:include page="/WEB-INF/ModalIncludes/editPlayer.jsp" ></jsp:include>
 <jsp:include page="/WEB-INF/ModalIncludes/removePlayer.jsp" ></jsp:include>
+<jsp:include page="/WEB-INF/ModalIncludes/addLeague.jsp" ></jsp:include>
+<jsp:include page="/WEB-INF/ModalIncludes/removeLeague.jsp" ></jsp:include>
+<jsp:include page="/WEB-INF/ModalIncludes/addNation.jsp" ></jsp:include>
+<jsp:include page="/WEB-INF/ModalIncludes/removeNation.jsp" ></jsp:include>
+<jsp:include page="/WEB-INF/ModalIncludes/addClub.jsp" ></jsp:include>
+<jsp:include page="/WEB-INF/ModalIncludes/editClub.jsp" ></jsp:include>
+<jsp:include page="/WEB-INF/ModalIncludes/removeClub.jsp" ></jsp:include>
 
 <jsp:include page="/footerIncludes.jsp"/>
