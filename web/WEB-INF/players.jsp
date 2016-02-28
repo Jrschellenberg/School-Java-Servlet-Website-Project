@@ -4,9 +4,26 @@
 </jsp:include>
 
 <% if (request.getParameter("p") == null) {%>
-<c:forEach var="p" items="${allplayers}">
-    <h1><a href="<%=request.getContextPath()%>/Players?p=${p.playerId}">${p.playerName}</a></h1>
-    </c:forEach>
+
+<div class="container-fluid" style="margin: 30px 0 10px 0"> 
+
+<div class="row " style="display: table;">
+
+    <div class="col-sm-9 col-md-8 col-lg-11" style="float: none;display: table-cell;vertical-align: top;">
+
+        <div class="row">
+            <c:forEach var="p" items="${allplayers}">
+                <%@ include file="playerCard.jsp" %>
+            </c:forEach>
+        </div>
+
+
+    </div>
+
+</div>
+ </div>    
+    
+
     <% } else {%>
 <br /><br />
 <jsp:useBean id="playerValues" type="beans.PlayerValues" scope="request" />
