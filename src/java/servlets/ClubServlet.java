@@ -53,7 +53,7 @@ public class ClubServlet extends HttpServlet {
             clubsValues = clubDB.allClubs();
             request.setAttribute("clubs", clubsValues);
             util.forwardRequest(request, response, "/WEB-INF/clubs.jsp");
-             
+
         }
         else if(clubDB.clubFound(clubId)){
             

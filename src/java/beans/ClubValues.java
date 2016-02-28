@@ -10,12 +10,14 @@ public class ClubValues {
     private int clubLeagueId;
     private String clubName;
     private String clubPicture;
+    private String clubLeagueName;
     
     public ClubValues() {
         clubId=0;
         clubLeagueId=0;
         clubName="";
         clubPicture="";
+        clubLeagueName="";
     }
     
     public int getClubId() {
@@ -46,6 +48,12 @@ public class ClubValues {
         this.clubPicture = clubPicture;
     }
 
+    public String getClubLeagueName() {
+        return clubLeagueName;
+    }
+    public void setClubLeagueName(String clubLeagueName) {
+        this.clubLeagueName = clubLeagueName;
+    }
 
 
 }

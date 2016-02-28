@@ -192,6 +192,12 @@ public class DBUtilities {
             values.setClubLeagueId(resultSet.getInt("club_league_id"));
             values.setClubName(resultSet.getString("Club_name"));
             values.setClubPicture(resultSet.getString("Club_picture"));
+            
+            ResultSet resultSetClubLeague = DBconnection.db.query(
+                    "SELECT * FROM leagues WHERE League_id='" + resultSet.getInt("club_league_id") + "' ");
+            while (resultSetClubLeague.next()) {
+                values.setClubLeagueName(resultSetClubLeague.getString("league_name"));
+            }
 
             results.add(values);
         }
