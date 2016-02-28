@@ -3,21 +3,90 @@
     <jsp:param name="title" value="Players" />
 </jsp:include>
 
-<% if (request.getParameter("p") == null){ %>
+<% if (request.getParameter("p") == null) {%>
 <c:forEach var="p" items="${allplayers}">
     <h1><a href="<%=request.getContextPath()%>/Players?p=${p.playerId}">${p.playerName}</a></h1>
-</c:forEach>
-<% }else{ %>
+    </c:forEach>
+    <% } else {%>
+<br /><br />
 <jsp:useBean id="playerValues" type="beans.PlayerValues" scope="request" />
-<h1> Players Name ... <jsp:getProperty name="playerValues" property="playerName" /></h1>
-<h1> Players Birthday ...<jsp:getProperty name="playerValues" property="playerBirthday" /></h1>
-<h1> Players Picture ...<jsp:getProperty name="playerValues" property="playerPicture" /></h1>
-<h1> Players Position ...<jsp:getProperty name="playerValues" property="playerPosition" /></h1>
-<h1> Players Height ...<jsp:getProperty name="playerValues" property="playerHeight" /></h1>
-<h1> Players Number ...<jsp:getProperty name="playerValues" property="playerNumber" /></h1>
-<h1> Players Foot ...<jsp:getProperty name="playerValues" property="playerFoot" /></h1>
-<h1> Players Club ...<jsp:getProperty name="playerValues" property="playerClub" /></h1>
-<h1> Players Nation ...<jsp:getProperty name="playerValues" property="playerNation" /></h1>
-<% } %>
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-2 text-right">
+            <img src="http://futhead.cursecdn.com/static/img/16/players/20801.png" style="position: relative;z-index:101;bottom: -25px;left:4%;width:100px;height:100px">
+        </div>
+
+        <div class="col-md-6">
+            <h1 class="single-title" style="position: relative;top:35px">
+                <img src="http://futhead.cursecdn.com/static/img/16/nations/38.png" alt="" style="width:40px;height:40px">
+                <jsp:getProperty name="playerValues" property="playerName" />
+            </h1>
+        </div>
+
+        <div class="col-md-3">
+            <ul class="nav nav-tabs" style="position: relative;top:58px">  
+                <li class="active career"><a href="#about" role="tab" data-toggle="tab">About</a></li>
+                <li class="career"><a href="#career" role="tab" data-toggle="tab">Career</a></li>
+                <li class="career" ><a href="#news" role="tab" data-toggle="tab">News</a></li>
+
+            </ul>
+        </div>
+
+    </div>
+</div> 
+
+<div style="background-color: #fff;padding:10px;border-bottom: #BD1418 solid 5px;border-top: #BD1418 solid 8px;position: relative;z-index:100;"> 
+    <div class="container" style="padding: 0;">
+        <div style="position: relative;top:-18px;left:4%;background: url(<%=request.getContextPath()%>/images/player-background.jpg) no-repeat;height:37px; width:160px;"></div>
+        <div class="row">
+            <div class="col-md-3 text-center">   
+                <img src="http://futhead.cursecdn.com/static/img/16/clubs/243.png" style="width:225px;height:225px">
+            </div>
+            <div class="col-md-9 tab-content">
+                <div class="row tab-pane fade in active" id="about">
+
+                    <div class="row" style="padding-bottom:1px;border-bottom: #E7E7E7 solid 1px;margin: 0px 0 20px 0;">
+                        <div class="col-md-6">Club: <jsp:getProperty name="playerValues" property="playerClub" /></div>
+                        <div class="col-md-6">Nation: <jsp:getProperty name="playerValues" property="playerNation" /></div>
+                    </div>
+
+                    <div class="row" style="padding-bottom:1px;border-bottom: #E7E7E7 solid 1px;margin: 10px 0 20px 0;">
+                        <div class="col-md-6">Age: </div>
+                        <div class="col-md-6">Position: <jsp:getProperty name="playerValues" property="playerPosition" /></div>
+                    </div>
+
+                    <div class="row" style="padding-bottom:1px;border-bottom: #E7E7E7 solid 1px;margin: 10px 0 20px 0;">
+                        <div class="col-md-6">BirthDay: <jsp:getProperty name="playerValues" property="playerBirthday" /></div>
+                        <div class="col-md-6">Height: <jsp:getProperty name="playerValues" property="playerHeight" /></div>
+                    </div>
+
+                    <div class="row" style="padding-bottom:1px;border-bottom: #E7E7E7 solid 1px;margin: 10px 0 20px 0;">
+                        <div class="col-md-6">Foot: <jsp:getProperty name="playerValues" property="playerFoot" /></div>
+                        <div class="col-md-6">Number: <jsp:getProperty name="playerValues" property="playerNumber" /></div>
+                    </div>
+
+                </div> 
+
+                <div class="row tab-pane fade" id="career">
+                    <div class="row" style="padding-bottom:1px;border-bottom: #E7E7E7 solid 1px;margin: 0px 0 20px 0;">Career Coming Soon !</div>
+                </div>
+
+                <div class="row tab-pane fade" id="news">
+                    <div class="row" style="padding-bottom:1px;border-bottom: #E7E7E7 solid 1px;margin: 0px 0 20px 0;">
+                        News Coming Soon !
+                       <!-- <jsp:getProperty name="playerValues" property="playerPicture" /> -->
+                        
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>     
+
+<% }%>
 
 <jsp:include page="/footerIncludes.jsp"/>
