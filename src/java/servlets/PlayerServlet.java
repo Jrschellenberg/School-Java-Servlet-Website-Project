@@ -5,6 +5,8 @@
  */
 package servlets;
 
+import beans.CommentValues;
+import beans.ErrorMessage;
 import utils.DBUtilities;
 import utils.Utilities;
 import java.io.IOException;
@@ -17,7 +19,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import beans.PlayerValues;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 /**
  *
  * @author Justin
@@ -39,25 +44,53 @@ public class PlayerServlet extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         DBUtilities playerDB = DBUtilities.getInstance();
         PlayerValues nValues = new PlayerValues();
-        ArrayList<PlayerValues> allPlayers = new  ArrayList<PlayerValues>();
+        ArrayList<PlayerValues> allPlayers = new ArrayList<PlayerValues>();
+        ArrayList<CommentValues> allComments = new ArrayList<CommentValues>();
         Utilities util = Utilities.getInstance();
-              
+        ErrorMessage eMsg = new ErrorMessage();
+        String action = request.getParameter("action");
+
         String playerID = request.getParameter("p");
-        if(playerID == null){
-            
+        if (playerID == null) {
+
             allPlayers = playerDB.allPlayers();
             request.setAttribute("allplayers", allPlayers);
-           
-        }
-        else{
-            
+
+        } else if (playerDB.playerFound(playerID)) {
+            if (action == null) {
+
+            }
+            else if (action.equals("addComment")) {
+                String user = (String) request.getSession().getAttribute("username");
+                String userId = playerDB.getUserId(user);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date d = new Date();
+                String date = dateFormat.format(d);
+                String commentText = request.getParameter("addComment");
+                int i = playerDB.addComment(userId, playerID, commentText, date);
+
+            }
+            //call db to get comments based off p value (players id)
+            //have check to make sure p(index) is integer.
+            //have check to make sure p(index) exists
+            //use session object to determine if "add comment" button available.
+            //
             nValues = playerDB.playerStats(playerID);
             request.setAttribute("playerValues", nValues);
+            if (playerDB.commentsExist(playerID)) {
+                allComments = playerDB.playerComments(playerID);
+            }
+            request.setAttribute("allcomments", allComments);
+            request.setAttribute("player", playerID);
+
+        } else {
+            eMsg.setMsg("Sorry but an error occured with your request for a certain Player :( sorry!");
+            request.setAttribute("ErrorMessage", eMsg);
+            util.forwardRequest(request, response, "/WEB-INF/error.jsp");
+
         }
-        
-        
+
         util.forwardRequest(request, response, "/WEB-INF/players.jsp");
-        
 
     }
 

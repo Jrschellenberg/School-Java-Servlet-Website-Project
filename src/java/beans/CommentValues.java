@@ -13,6 +13,12 @@ public class CommentValues {
     private String commentText;
     private String commentDate;
     private String userName;
+    
+    public CommentValues(){
+        commentText="";
+        commentDate="";
+        userName="";
+    }
 
     public String getCommentText() {
         return commentText;
@@ -27,7 +33,11 @@ public class CommentValues {
     }
 
     public void setCommentDate(String commentDate) {
-        this.commentDate = commentDate;
+        String delims = "[-]";
+        String[] tokens = commentDate.split(delims);
+        String[] months = {"January", "February", "March", "April","May","June","July","August","September","October","November","December"};
+        int month = Integer.parseInt(tokens[1]) -1;        
+        this.commentDate = months[month]+" "+tokens[2]+", "+tokens[0];
     }
 
     public String getUserName() {

@@ -7,24 +7,24 @@
 
 <div class="container-fluid" style="margin: 30px 0 10px 0"> 
 
-<div class="row " style="display: table;">
+    <div class="row " style="display: table;">
 
-    <div class="col-sm-9 col-md-8 col-lg-11" style="float: none;display: table-cell;vertical-align: top;">
+        <div class="col-sm-9 col-md-8 col-lg-11" style="float: none;display: table-cell;vertical-align: top;">
 
-        <div class="row">
-            <c:forEach var="p" items="${allplayers}">
-                <%@ include file="playerCard.jsp" %>
-            </c:forEach>
+            <div class="row">
+                <c:forEach var="p" items="${allplayers}">
+                    <%@ include file="playerCard.jsp" %>
+                </c:forEach>
+            </div>
+
+
         </div>
 
-
     </div>
+</div>    
 
-</div>
- </div>    
-    
 
-    <% } else {%>
+<% } else {%>
 <br /><br />
 <jsp:useBean id="playerValues" type="beans.PlayerValues" scope="request" />
 <div class="container">
@@ -93,9 +93,9 @@
                 <div class="row tab-pane fade" id="news">
                     <div class="row" style="padding-bottom:1px;border-bottom: #E7E7E7 solid 1px;margin: 0px 0 20px 0;">
                         News Coming Soon !
-                       <!-- <jsp:getProperty name="playerValues" property="playerPicture" /> -->
-                        
-                        
+                        <!-- <jsp:getProperty name="playerValues" property="playerPicture" /> -->
+
+
                     </div>
                 </div>
 
@@ -103,12 +103,27 @@
         </div>
     </div>
 </div>
-                       
-                       
-                       
-                       
-                       
-                       
+
+
+<c:forEach var="comments" items="${allcomments}">
+    <div>
+        ${comments.commentText} <br> ${comments.commentDate} <br> ${comments.userName}
+    </div>
+</c:forEach>
+<%if(request.getSession().getAttribute("username") !=null){%>
+<button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#addComment">
+    Leave a Comment
+</button>
+<jsp:include page="/WEB-INF/ModalIncludes/addComment.jsp" >
+    <jsp:param name="p" value="${player}" />
+</jsp:include>
+
+<%}%>
+
+
+
+
+
 
 <% }%>
 

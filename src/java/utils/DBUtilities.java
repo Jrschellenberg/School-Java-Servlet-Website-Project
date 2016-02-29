@@ -6,6 +6,7 @@
 package utils;
 
 import beans.ClubValues;
+import beans.CommentValues;
 import beans.LeagueValues;
 import beans.NationValues;
 import beans.PlayerValues;
@@ -192,7 +193,7 @@ public class DBUtilities {
             values.setClubLeagueId(resultSet.getInt("club_league_id"));
             values.setClubName(resultSet.getString("Club_name"));
             values.setClubPicture(resultSet.getString("Club_picture"));
-            
+
             ResultSet resultSetClubLeague = DBconnection.db.query(
                     "SELECT * FROM leagues WHERE League_id='" + resultSet.getInt("club_league_id") + "' ");
             while (resultSetClubLeague.next()) {
@@ -726,5 +727,68 @@ public class DBUtilities {
 
         return result;
     }
-    
+
+    public ArrayList<CommentValues> playerComments(String id) throws ClassNotFoundException, SQLException {
+        ArrayList<CommentValues> results = new ArrayList<CommentValues>();
+
+        ResultSet resultSet = DBconnection.db.query("SELECT * FROM comments WHERE Comment_player_id='" + id + "' ");
+
+        while (resultSet.next()) { //safeguard if query executed or not.
+
+            CommentValues values = new CommentValues();
+
+            values.setCommentText(resultSet.getString("Comment_txt"));
+            values.setCommentDate(resultSet.getString("Comment_date"));
+
+            ResultSet resultSetUser = DBconnection.db.query(
+                    "SELECT * FROM users WHERE User_id='" + resultSet.getInt("Comment_user_id") + "' ");
+            while (resultSetUser.next()) {
+                values.setUserName(resultSetUser.getString("User_username"));
+            }
+
+            results.add(values);
+        }
+
+        return results;
+    }
+
+    public boolean commentsExist(String id) throws ClassNotFoundException, SQLException {
+
+        ResultSet resultSet = DBconnection.db.query("SELECT * FROM comments WHERE Comment_player_id='" + id + "';");
+
+        while (resultSet.next()) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean playerFound(String id) throws ClassNotFoundException, SQLException {
+        ResultSet resultSet = DBconnection.db.query("SELECT * FROM players WHERE Player_id ='" + id + "' ");
+
+        while (resultSet.next()) {
+            return true;
+        }
+        return false;
+    }
+
+    public int addComment(String userId, String playerId, String commentTxt, String commentDate) throws ClassNotFoundException, SQLException {
+
+        int result = DBconnection.db.insert(
+                "INSERT INTO comments (Comment_user_id, Comment_player_id, Comment_txt, Comment_date) VALUES (" + userId + ",'" + playerId + "', '" + commentTxt + "', '"+commentDate+"');"
+        );
+
+        return result;
+    }
+
+    public String getUserId(String username) throws ClassNotFoundException, SQLException {
+
+        ResultSet resultSet = DBconnection.db.query("SELECT User_id FROM users WHERE User_username='" + username + "'");
+
+        while (resultSet.next()) {
+            return resultSet.getString("User_id");
+        }
+
+        return "";
+    }
+
 }
