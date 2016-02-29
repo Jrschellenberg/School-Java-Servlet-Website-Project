@@ -7330,7 +7330,7 @@ color: #fff;
 .url_box>a:hover,
 .url_box>a:focus,
 .url_box>a:active {
-    background-color: #E8E8E8;
+    background-color: #820A0C;
 }
 
 .url_box>a h1 {
@@ -7347,7 +7347,7 @@ color: #fff;
 .url_box>a:hover h1,
 .url_box>a:focus h1 ,
 .url_box>a:active h1 {
-    color: #960C0F;
+    font-weight: bold;
 }
 
 
