@@ -50,6 +50,7 @@ public class PlayerServlet extends HttpServlet {
            
         }
         else{
+            
             nValues = playerDB.playerStats(playerID);
             request.setAttribute("playerValues", nValues);
         }
