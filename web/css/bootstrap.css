@@ -7317,3 +7317,77 @@ color: #fff;
         float: left;
     }
 }
+/************************/
+/* url_box  (leagues, clubs, nations) */
+
+.url_box>a {
+    display: block;
+    background-color:#960C0F; 
+    text-decoration: none;
+    border-radius: 25px;
+}
+
+.url_box>a:hover,
+.url_box>a:focus,
+.url_box>a:active {
+    background-color: #820A0C;
+}
+
+.url_box>a h1 {
+    font-size: 22px;
+    padding: 0 4px 4px 4px;
+    color: #fff;
+}
+
+.url_box>a h1.small{
+    font-size: 14px;
+    margin-top: 0;
+}
+
+.url_box>a:hover h1,
+.url_box>a:focus h1 ,
+.url_box>a:active h1 {
+    font-weight: bold;
+}
+
+
+/************************/
+/* table  (clubs on leaguespage ) */
+
+.table_title {
+
+    display: block;
+    background-color:#292929; 
+    margin: 2px 0;
+    padding: 7px;
+    font-size: 22px;
+    color: #fff;
+}
+
+.url_table>a {
+    display: block;
+    background-color:#414141; 
+    text-decoration: none;
+    margin: 2px 0;
+    padding: 7px;
+}
+
+.url_table>a:hover,
+.url_table>a:focus,
+.url_table>a:active {
+    background-color: #1A1A1A;
+    padding-left: 10px;
+}
+
+.url_table>a h2 {
+    font-size: 14px;
+    color: #fff;
+    display: inline;
+    font-weight: bold;
+}
+
+.url_table>a:hover h2,
+.url_table>a:focus h2 ,
+.url_table>a:active h2 {
+    color: #BD1418;
+}
