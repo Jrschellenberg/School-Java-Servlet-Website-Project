@@ -9,53 +9,60 @@
 
 <div class="container-fluid"> 
 
-            <div class="text-center" style="background-color:#BE1418;width:100%;border-bottom: #960C0F solid 5px;border-top: #960C0F solid 5px;margin-top: 100px"> 
-                <div style="margin: 0 auto;width:1000px;">
-                    
-                <div class="row container" style="display: table;">
-                    <div class="col-sm-9 col-md-8 col-lg-9" style="float: none;display: table-cell;vertical-align: top;">
-                        <div class="row">
-                            <c:forEach var="l" items="${leagues}">
-                            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-15" style="width:166px;height:180px;background-color:#960C0F; margin: 1px 0 1px 1px; ">
-                                    <img src="http://3.bp.blogspot.com/-TppYKVyfGGk/VNqG7XoA-VI/AAAAAAAAn4w/mO6qyNl2yuo/s1600/Premier%2BLeague.png" style="width:128px;height:128px">
-                                    <h1><a href="<%=request.getContextPath()%>/Leagues?l=${l.leagueId}">${l.leagueName}</a></h1> 
+    <div class="text-center" style="background-color:#BE1418;width:100%;border-bottom: #960C0F solid 5px;border-top: #960C0F solid 5px;margin-top: 100px"> 
+        <div style="margin: 0 auto;width:1000px;">
+
+            <div class="row container" style="display: table;">
+                <div class="col-sm-9 col-md-8 col-lg-9" style="float: none;display: table-cell;vertical-align: top;">
+                    <div class="row">
+
+                        <c:forEach var="l" items="${leagues}">
+                            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-15" style="margin: 5px 0 5px 3px;"> 
+                                <div class="url_box" style="width:173px;height:180px;">
+                                    <a href="<%=request.getContextPath()%>/Leagues?l=${l.leagueId}">
+                                        <div>
+                                            <img src="http://3.bp.blogspot.com/-TppYKVyfGGk/VNqG7XoA-VI/AAAAAAAAn4w/mO6qyNl2yuo/s1600/Premier%2BLeague.png" style="width:128px;height:128px">
+                                            <h1>${l.leagueName}</h1>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
-                            </c:forEach>
-                        </div>
+                        </c:forEach>
+
                     </div>
                 </div>
-                    
-                </div>
-            </div>            
+            </div>
+
+        </div>
+    </div>            
 </div>
 
 <% } else {%>
 
 <div class="row container" style="display: table;">
-    <div class="col-sm-3 col-md-4 col-lg-3" style="color:#fff;height:100%;;background-color: #2E2E2E;float: none;display: table-cell;vertical-align: top;">
-        <div class="row text-center" style="height: 260px;border-bottom: #BD1418 solid 5px;background-color: #fff">   
-            <!-- league pic -->
-            <img src="http://3.bp.blogspot.com/-TppYKVyfGGk/VNqG7XoA-VI/AAAAAAAAn4w/mO6qyNl2yuo/s1600/Premier%2BLeague.png" style="width:256px;height:256px">
+    <div class="col-sm-3 col-md-4 col-lg-3" style="color:#fff;height:100%;;background-color: #2E2E2E;float: none;display: table-cell;">
+        <div class="row text-center" style="min-height: 200px;border-bottom: #BD1418 solid 5px;background-color: #fff">   
+            <img src="http://3.bp.blogspot.com/-TppYKVyfGGk/VNqG7XoA-VI/AAAAAAAAn4w/mO6qyNl2yuo/s1600/Premier%2BLeague.png" style="width:180px;height:180px;">
         </div>
 
 
-        <div class="row" style="border-left: #515151 solid 0px">
+        <div class="row" style="border-left: #515151 solid 0px;height: 100vh;">
 
             <!-- Clubs Table -->
             <div class="table-responsive">
+                <div class="table_title">Clubs</div>
+                <c:forEach var="c" items="${clubs}">
+                    <div class="url_table">
+                        <a href="<%=request.getContextPath()%>/Clubs?c=${c.clubId}">
+                            <div>
+                                <img src="http://futhead.cursecdn.com/static/img/16/clubs/243.png" style="width:16px;height:16px">
+                                <h2>${c.clubName}</h2>
+                            </div>
+                        </a>
+                    </div>
+                </c:forEach>
 
-                <table class="table" style="font-size: 10pt;">
-                    <tr class="first">
-                        <td>Clubs</td>
-                    </tr>
 
-                    <c:forEach var="c" items="${clubs}">
-                        <tr>
-                            <td class="second"><a href="<%=request.getContextPath()%>/Clubs?c=${c.clubId}">${c.clubName}</a></td>
-                        </tr>
-                    </c:forEach>
-
-                </table>
             </div>
 
         </div>
@@ -63,10 +70,10 @@
 
 
 
-    <div class="col-sm-9 col-md-8 col-lg-9" style="float: none;display: table-cell;vertical-align: top;">
-        <div class="row" style="background-color: #BD1418;min-height: 260px;border-bottom: #850E11 solid 5px;padding: 5% 0 0 5%;margin-bottom: 10px;">
-            <div style="font-size: 112px; color: #fff">
-                <c:out value="${clubs[0].clubLeagueName}"/>
+    <div class="col-sm-9 col-md-8 col-lg-9" style="float: none;display: table-cell;vertical-align: top;width: 100%">
+        <div class="row" style="background-color: #BD1418;min-height: 200px;border-bottom: #850E11 solid 5px;padding: 5% 0 0 2%;margin-bottom: 10px;">
+            <div>
+                <h1 style="font-size: 80px;"><c:out value="${clubs[0].clubLeagueName}"/></h1>
             </div>
         </div>
 

@@ -8,28 +8,34 @@
 
 <div class="container-fluid"> 
 
-            <div class="text-center" style="background-color:#BE1418;width:100%;border-bottom: #960C0F solid 5px;border-top: #960C0F solid 5px;margin: 100px 0 100px 0"> 
-                <div style="margin: 0 auto;width:1000px;">
-                    
-                <div class="row">
-                    <div class="col-sm-9 col-md-8 col-lg-9" style="float: none;display: table-cell;">
-                        <div class="row">
-                                <c:forEach var="c" items="${clubs}">
-                                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-15" style="width:160px;height:140px;background-color:#960C0F; margin: 1px 0 1px 1px; ">
-                                        <img src="http://futhead.cursecdn.com/static/img/16/nations/38.png" alt="" style="width:64px;height:64px">
-                                        <h1><a href="<%=request.getContextPath()%>/Clubs?c=${c.clubId}">${c.clubName}</a></h1>
-                                    </div>
-                                </c:forEach>
-                            
-                        </div>
+    <div class="text-center" style="background-color:#BE1418;width:100%;border-bottom: #960C0F solid 5px;border-top: #960C0F solid 5px;margin: 100px 0 100px 0"> 
+        <div style="margin: 0 auto;width:1000px;">
+
+            <div class="row">
+                <div class="col-sm-9 col-md-8 col-lg-9" style="float: none;display: table-cell;">
+                    <div class="row">
+                        <c:forEach var="c" items="${clubs}">
+                            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2" style="margin: 5px 0;">
+                                <div class="url_box" style="width:140px;height:75px;">
+                                    <a href="<%=request.getContextPath()%>/Clubs?c=${c.clubId}">
+                                        <div>
+                                            <img src="http://futhead.cursecdn.com/static/img/16/nations/38.png" alt="" style="width:50px;height:50px">
+                                            <h1 class="small">${c.clubName}</h1>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </c:forEach>
+
                     </div>
                 </div>
-                    
-                </div>
-            </div>     
+            </div>
+
+        </div>
+    </div>     
 </div>
 
-        
+
 <% } else {%>
 
 <div class="container-fluid"> 
