@@ -20,22 +20,20 @@ import javax.servlet.http.HttpServletResponse;
  * @author Justin
  */
 public class Utilities {
-    
-    private volatile static Utilities uniqueInstance;
-    
-    
-    public static Utilities getInstance(){
-    if(uniqueInstance == null){
-        synchronized(Utilities.class){
-            if(uniqueInstance == null){
-                uniqueInstance = new Utilities();
-            }
-        }
 
+    private volatile static Utilities uniqueInstance;
+
+    public static Utilities getInstance() {
+        if (uniqueInstance == null) {
+            synchronized (Utilities.class) {
+                if (uniqueInstance == null) {
+                    uniqueInstance = new Utilities();
+                }
+            }
+
+        }
+        return uniqueInstance;
     }
-    return uniqueInstance;
-    }
-    
 
     public boolean foundCookie(String target, Cookie[] cookies) {
         if (cookies != null) {
@@ -48,15 +46,36 @@ public class Utilities {
         }
         return false;
     }
-    
+
+    public void setLastLoginCookie(Cookie lastLogin, HttpServletRequest request) {
+        String userNamePlaceholder = "";
+        if (lastLogin != null) {
+            userNamePlaceholder = lastLogin.getValue();
+        }
+        request.setAttribute("name", userNamePlaceholder);
+
+    }
+
+    public Cookie getCookie(String target, Cookie[] cookies) {
+        if (cookies != null) {
+            for (int i = 0; i < cookies.length; i++) {
+                Cookie cookie = cookies[i];
+                if (target.equals(cookie.getName())) {        //A cookie with user login credentials was found. Push them to home.jsp                    
+                    return cookie;
+                }
+            }
+        }
+        return null;
+    }
+
     public void forwardRequest(HttpServletRequest request, HttpServletResponse response, String url)
-    throws ServletException, IOException{
+            throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher(url);
         rd.forward(request, response);
     }
-    
+
     public void includeRequest(HttpServletRequest request, HttpServletResponse response, String url)
-    throws ServletException, IOException{
+            throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher(url);
         rd.include(request, response);
     }
