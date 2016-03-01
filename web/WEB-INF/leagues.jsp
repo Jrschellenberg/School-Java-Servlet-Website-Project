@@ -21,7 +21,7 @@
                                 <div class="url_box" style="width:173px;height:180px;">
                                     <a href="<%=request.getContextPath()%>/Leagues?l=${l.leagueId}">
                                         <div>
-                                            <img src="http://3.bp.blogspot.com/-TppYKVyfGGk/VNqG7XoA-VI/AAAAAAAAn4w/mO6qyNl2yuo/s1600/Premier%2BLeague.png" style="width:128px;height:128px">
+                                            <img src="<%=request.getContextPath()%>/images/leagues/${l.leaguePicture}" style="width:128px;height:128px">
                                             <h1>${l.leagueName}</h1>
                                         </div>
                                     </a>

@@ -32,7 +32,7 @@
     <div class="row">
 
         <div class="col-md-2 text-right">
-            <img src="http://futhead.cursecdn.com/static/img/16/players/20801.png" style="position: relative;z-index:101;bottom: -25px;left:4%;width:100px;height:100px">
+            <img src="<%=request.getContextPath()%>/images/players/<jsp:getProperty name="playerValues" property="playerPicture" />" style="position: relative;z-index:101;bottom: -25px;left:4%;width:100px;height:100px">
         </div>
 
         <div class="col-md-6">

@@ -16,10 +16,10 @@
                     <div class="row">
                         <c:forEach var="c" items="${clubs}">
                             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2" style="margin: 5px 0;">
-                                <div class="url_box" style="width:150px;height:75px;">
+                                <div class="url_box" style="width:150px;height:75px;;">
                                     <a href="<%=request.getContextPath()%>/Clubs?c=${c.clubId}">
-                                        <div>
-                                            <img src="http://futhead.cursecdn.com/static/img/16/nations/38.png" alt="" style="width:50px;height:50px">
+                                        <div style="padding-top: 4px">
+                                            <img src="<%=request.getContextPath()%>/images/clubs/${c.clubPicture}" alt="" style="width:48px;height:48px">
                                             <h1 class="small">${c.clubName}</h1>
                                         </div>
                                     </a>

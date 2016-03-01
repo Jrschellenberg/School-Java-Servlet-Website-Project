@@ -7325,12 +7325,14 @@ color: #fff;
     background-color:#960C0F; 
     text-decoration: none;
     border-radius: 25px;
+    opacity: 0.9;
 }
 
 .url_box>a:hover,
 .url_box>a:focus,
 .url_box>a:active {
     background-color: #820A0C;
+    opacity: 1;
 }
 
 .url_box>a h1 {
