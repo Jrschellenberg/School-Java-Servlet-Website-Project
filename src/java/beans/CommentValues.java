@@ -13,11 +13,21 @@ public class CommentValues {
     private String commentText;
     private String commentDate;
     private String userName;
+    private String commentId;
+
+    public String getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(String commentId) {
+        this.commentId = commentId;
+    }
     
     public CommentValues(){
         commentText="";
         commentDate="";
         userName="";
+        commentId="";
     }
 
     public String getCommentText() {

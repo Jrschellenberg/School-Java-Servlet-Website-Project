@@ -109,14 +109,51 @@
     <div>
         ${comments.commentText} <br> ${comments.commentDate} <br> ${comments.userName}
     </div>
+
+    <c:choose>
+
+        <c:when test="${sessionScope.admin != null}">
+            <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#editComment${comments.commentId}">
+                Edit Comment
+            </button>
+            <form action="<%=request.getContextPath()%>/Players?p=<%out.write(request.getAttribute("player").toString());%>" method="POST" >
+                <input type="hidden" name="removeCommentId" id="username" size="20" value="${comments.commentId}" />
+                <input class="btn btn-default navbar-btn" type="submit" name="action" value="Remove" />
+            </form>
+            <jsp:include page="/WEB-INF/ModalIncludes/editComment.jsp" >
+                <jsp:param name="p" value="${player}" />
+                <jsp:param name="id" value="${comments.commentId}" />
+            </jsp:include>
+
+        </c:when>
+        <c:when test="${sessionScope.username == comments.userName}">   
+            <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#editComment${comments.commentId}">
+                Edit Comment
+            </button>
+            <form action="<%=request.getContextPath()%>/Players?p=<%out.write(request.getAttribute("player").toString());%>" method="POST" >
+                <input type="hidden" name="removeCommentId" id="username" size="20" value="${comments.commentId}" />
+                <input class="btn btn-default navbar-btn" type="submit" name="action" value="Remove" />
+            </form>
+            <jsp:include page="/WEB-INF/ModalIncludes/editComment.jsp" >
+                <jsp:param name="p" value="${player}" />
+                <jsp:param name="id" value="${comments.commentId}" />
+            </jsp:include>
+        </c:when>
+    </c:choose>
+
+
 </c:forEach>
-<%if(request.getSession().getAttribute("username") !=null){%>
+
+
+
+<%if (request.getSession().getAttribute("username") != null) {%>
 <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#addComment">
     Leave a Comment
 </button>
 <jsp:include page="/WEB-INF/ModalIncludes/addComment.jsp" >
     <jsp:param name="p" value="${player}" />
 </jsp:include>
+
 
 <%}%>
 

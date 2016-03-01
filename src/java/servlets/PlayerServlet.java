@@ -57,30 +57,41 @@ public class PlayerServlet extends HttpServlet {
             request.setAttribute("allplayers", allPlayers);
 
         } else if (playerDB.playerFound(playerID)) {
-            if (action == null) {
+            if (request.getSession().getAttribute("username") != null) { //makes sure user signed in to avoid crash if specifically call action as GET parameter
+                if (action == null) {
+                } //Start of AddComment functionality.
+                else if (action.equals("addComment")) {
+                    String user = (String) request.getSession().getAttribute("username");
+                    String userId = playerDB.getUserId(user);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    Date d = new Date();
+                    String date = dateFormat.format(d);
+                    String commentText = request.getParameter("addComment");
+                    int i = playerDB.addComment(userId, playerID, commentText, date);
 
-            }
-            else if (action.equals("addComment")) {
-                String user = (String) request.getSession().getAttribute("username");
-                String userId = playerDB.getUserId(user);
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Date d = new Date();
-                String date = dateFormat.format(d);
-                String commentText = request.getParameter("addComment");
-                int i = playerDB.addComment(userId, playerID, commentText, date);
+                }//End Add comment Functionality.
+                //Start edit Comments Functionality.
+                else if (action.equals("editComment")) {
+                    String user = (String) request.getSession().getAttribute("username");
+                    String userId = playerDB.getUserId(user);
+                    String commentText = request.getParameter("editComment");
+                    String commentId = request.getParameter("editCommentId");
+                    int i = playerDB.editComment(userId, playerID, commentText, commentId);
 
+                }//end of Edit Comments Funtionality.
+                //Start remove Comments Functionality
+                else if (action.equals("Remove")) {
+                    String commentId = request.getParameter("removeCommentId");
+                    int i = playerDB.removeComment(commentId);
+                }
             }
-            //call db to get comments based off p value (players id)
-            //have check to make sure p(index) is integer.
-            //have check to make sure p(index) exists
-            //use session object to determine if "add comment" button available.
-            //
+
             nValues = playerDB.playerStats(playerID);
             request.setAttribute("playerValues", nValues);
-            if (playerDB.commentsExist(playerID)) {
+            if (playerDB.commentsExist(playerID)) { //checks if comments are available for display on this page
                 allComments = playerDB.playerComments(playerID);
             }
-            request.setAttribute("allcomments", allComments);
+            request.setAttribute("allcomments", allComments); //Sets the comments to be passed as request attribute.
             request.setAttribute("player", playerID);
 
         } else {

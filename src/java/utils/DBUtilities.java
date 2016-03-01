@@ -736,7 +736,7 @@ public class DBUtilities {
         while (resultSet.next()) { //safeguard if query executed or not.
 
             CommentValues values = new CommentValues();
-
+            values.setCommentId(resultSet.getString("Comment_id"));
             values.setCommentText(resultSet.getString("Comment_txt"));
             values.setCommentDate(resultSet.getString("Comment_date"));
 
@@ -774,7 +774,7 @@ public class DBUtilities {
     public int addComment(String userId, String playerId, String commentTxt, String commentDate) throws ClassNotFoundException, SQLException {
 
         int result = DBconnection.db.insert(
-                "INSERT INTO comments (Comment_user_id, Comment_player_id, Comment_txt, Comment_date) VALUES (" + userId + ",'" + playerId + "', '" + commentTxt + "', '"+commentDate+"');"
+                "INSERT INTO comments (Comment_user_id, Comment_player_id, Comment_txt, Comment_date) VALUES (" + userId + ",'" + playerId + "', '" + commentTxt + "', '" + commentDate + "');"
         );
 
         return result;
@@ -789,6 +789,22 @@ public class DBUtilities {
         }
 
         return "";
+    }
+
+    public int editComment(String userId, String playerId, String commentTxt, String commentId) throws ClassNotFoundException, SQLException {
+
+        int result = DBconnection.db.insert(
+                "UPDATE comments SET Comment_user_id=" + userId + ", Comment_player_id=" + playerId + ", Comment_txt=\"" + commentTxt + "\" WHERE Comment_id=" + commentId + ";");
+
+        return result;
+    }
+
+    public int removeComment(String commentId) throws ClassNotFoundException, SQLException {
+
+        int result = DBconnection.db.insert(
+                "DELETE from comments WHERE Comment_id="+commentId+";");
+
+        return result;
     }
 
 }
