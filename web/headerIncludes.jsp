@@ -34,9 +34,9 @@
 
                         <a class="navbar-brand" title="description" href="<%=request.getContextPath()%>/Home"><img src="images/logo-small.png" style="width:181px;height: 49px;"></a>
 
-                                <form id="search" action="<%=request.getContextPath()%>/Search" method="GET" enctype="text/plain" class="navbar-form" style="float:  right;">
+                                <form id="search" action="<%=request.getContextPath()%>/Search" method="GET" enctype="text/plain" style="float:  right;">
                                     <div>
-                                        <input type="text" name="q" id="q" style="font-size:10pt;height:25px;width: 200px">   
+                                        <input class="searchHeader"  type="text" name="q" id="q" placeholder="Search for any player...">   
                                     </div>
                                 </form>
                     </div>

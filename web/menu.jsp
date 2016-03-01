@@ -7,9 +7,10 @@
     }
 %>
 <ul class="<%out.write(style);%>">
-    <li><a href="<%=request.getContextPath()%>/Players">Players</a></li>
-    <li><a href="<%=request.getContextPath()%>/Clubs">Clubs</a></li>
+    
     <li><a href="<%=request.getContextPath()%>/Leagues">Leagues</a></li>
+    <li><a href="<%=request.getContextPath()%>/Clubs">Clubs</a></li>
+    <li><a href="<%=request.getContextPath()%>/Players">Players</a></li>
     <li><a href="<%=request.getContextPath()%>/Nations">Nations</a></li>
     
     <% if(request.getSession().getAttribute("username") !=null){ %>

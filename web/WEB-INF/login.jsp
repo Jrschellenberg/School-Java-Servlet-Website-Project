@@ -23,6 +23,7 @@
         <jsp:useBean id="vObj" type="beans.UserValues" scope="request" />
         <h2 style="color:#fff"><jsp:getProperty name="vObj" property="msg" /></h2>
     </div>
+
     <% if (request.getSession().getAttribute("username") == null) {%>
     <div class="text-center" style="border-top: #960C0F solid 5px;padding: 10px 0 10px 0;background-color:#BE1418;width:100%;border-bottom: #960C0F solid 5px;"> 
         <div style="margin: 0 auto;width:1000px">

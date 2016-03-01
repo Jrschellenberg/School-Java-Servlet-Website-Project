@@ -16,9 +16,9 @@
 
                         <c:forEach var="n" items="${nations}">
                             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2" style="margin: 5px 0;">
-                                <div class="url_box" style="width:140px;height:75px;">
+                                <div class="url_box" style="width:100px;height:70px;">
                                     <a href="<%=request.getContextPath()%>/Nations?n=${n.nationId}">
-                                        <div style="padding-top: 4px">
+                                        <div style="padding-top: 8px">
                                             <img src="<%=request.getContextPath()%>/images/nations/${n.nationPicture}" alt="" style="width:40px;height:25px">
                                             <h1 class="small">${n.nationName}</h1>
                                         </div>
