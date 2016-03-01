@@ -40,45 +40,34 @@ public class RegisterServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
+        Utilities util = Utilities.getInstance();
+        DBUtilities dbLogin = DBUtilities.getInstance();
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(60 * 60 * 5);//Set time to invalidate to 5 hours 
         UserValues valueObject = new UserValues();
-        Utilities util = Utilities.getInstance();
-        ErrorMessage eMsg = new ErrorMessage();
-        DBUtilities dbLogin = DBUtilities.getInstance();
-        eMsg.setMsg("Sorry but we encountered an error!");
-        request.setAttribute("ErrorMassage", eMsg);
 
         String action = request.getParameter("action");
         if (action == null) {
             valueObject.setMsg("Please enter a username and Password");
-            request.setAttribute("vObj", valueObject);
-            util.forwardRequest(request, response, "WEB-INF/register.jsp");
         } //Register Processing 
         else if (action.equals("Register")) {
             String par_username = request.getParameter("username");
             String par_password = request.getParameter("password");
 
-            if (par_username == null || par_password == null || par_username.trim().equals("") || par_password.trim().equals("")) {
-                valueObject.setMsg("Please fill in the username and password fields!");
-            } else if (dbLogin.usernameExist(par_username)) {
-
+            if (dbLogin.usernameExist(par_username)) {
                 valueObject.setUsername(par_username);
                 valueObject.setMsg("Sorry!! This username (" + par_username + ") already exists");
-
             } else if (dbLogin.userRegister(par_username, par_password) == 1) {
                 //Start record last used login credential functionality.                
-                Cookie lastLoginCookie = new Cookie("lastLogin", par_username);
-                lastLoginCookie.setMaxAge(60 * 60 * 24 * 7); //Set to 1 week.
-                response.addCookie(lastLoginCookie);
+                util.lastLoginCookie(response, par_username);
                 valueObject.setMsg("You have successfully Registered !");
             }
-
-            request.setAttribute("vObj", valueObject);
-            util.forwardRequest(request, response, "WEB-INF/register.jsp");
         } else {
+            util.errorRedirect(request, "Sorry but we encountered an error Registering");
             util.forwardRequest(request, response, "WEB-INF/error.jsp");
         }
+        request.setAttribute("vObj", valueObject);
+        util.forwardRequest(request, response, "WEB-INF/register.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -7,7 +7,6 @@ package servlets;
 
 import utils.DBUtilities;
 import utils.Utilities;
-import beans.ErrorMessage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -18,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import beans.*;
 import java.util.ArrayList;
+
 /**
  *
  * @author Justin
@@ -37,42 +37,23 @@ public class ClubServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
-        
-        DBUtilities clubDB = DBUtilities.getInstance();
-
-        ArrayList<ClubValues> clubsValues = new  ArrayList<ClubValues>();
-        ArrayList<PlayerValues> playersValues = new  ArrayList<PlayerValues>();
-        ErrorMessage message = new ErrorMessage();
-        
         Utilities util = Utilities.getInstance();
-              
+        DBUtilities clubDB = DBUtilities.getInstance();
+        ArrayList<ClubValues> clubsValues = new ArrayList<ClubValues>();
+        ArrayList<PlayerValues> playersValues = new ArrayList<PlayerValues>();
         String clubId = request.getParameter("c");
-        
-        if(clubId == null){
-            
+        if (clubId == null) {
             clubsValues = clubDB.allClubs();
             request.setAttribute("clubs", clubsValues);
-            util.forwardRequest(request, response, "/WEB-INF/clubs.jsp");
-
-        }
-        else if(clubDB.clubFound(clubId)){
-            
+        } else if (clubDB.clubFound(clubId)) {
             playersValues = clubDB.clubPlayers(clubId);
             request.setAttribute("players", playersValues);
-            util.forwardRequest(request, response, "/WEB-INF/clubs.jsp");
-            
-        }else{
-            
-             message.setMsg("Sorry No results found !");
-             request.setAttribute("ErrorMessage", message);
-             util.forwardRequest(request, response, "WEB-INF/error.jsp");
-             
-        }
-        
-        
-        
-        
 
+        } else {//If user manually enters invalid ?c= Parameter.          
+            util.errorRedirect(request, "Sorry No results found !");
+            util.forwardRequest(request, response, "WEB-INF/error.jsp");
+        }
+        util.forwardRequest(request, response, "/WEB-INF/clubs.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

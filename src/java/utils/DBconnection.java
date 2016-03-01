@@ -5,8 +5,16 @@ import java.sql.*;
  * @author Ramindu
  */
 public final class DBconnection {
+
+    /**
+     *
+     */
     public Connection conn;
     private Statement statement;
+
+    /**
+     *
+     */
     public static DBconnection db;
     private DBconnection() {
         String url= "jdbc:mysql://localhost:3308/";

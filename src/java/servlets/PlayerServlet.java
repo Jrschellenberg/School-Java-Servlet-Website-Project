@@ -6,11 +6,9 @@
 package servlets;
 
 import beans.CommentValues;
-import beans.ErrorMessage;
 import utils.DBUtilities;
 import utils.Utilities;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,20 +40,18 @@ public class PlayerServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
+        Utilities util = Utilities.getInstance();
         DBUtilities playerDB = DBUtilities.getInstance();
         PlayerValues nValues = new PlayerValues();
         ArrayList<PlayerValues> allPlayers = new ArrayList<PlayerValues>();
         ArrayList<CommentValues> allComments = new ArrayList<CommentValues>();
-        Utilities util = Utilities.getInstance();
-        ErrorMessage eMsg = new ErrorMessage();
+        
+        
         String action = request.getParameter("action");
-
         String playerID = request.getParameter("p");
         if (playerID == null) {
-
             allPlayers = playerDB.allPlayers();
             request.setAttribute("allplayers", allPlayers);
-
         } else if (playerDB.playerFound(playerID)) {
             if (request.getSession().getAttribute("username") != null) { //makes sure user signed in to avoid crash if specifically call action as GET parameter
                 if (action == null) {
@@ -68,8 +64,9 @@ public class PlayerServlet extends HttpServlet {
                     String date = dateFormat.format(d);
                     String commentText = request.getParameter("addComment");
                     int i = playerDB.addComment(userId, playerID, commentText, date);
-
                 }//End Add comment Functionality.
+                
+                
                 //Start edit Comments Functionality.
                 else if (action.equals("editComment")) {
                     String user = (String) request.getSession().getAttribute("username");
@@ -77,15 +74,15 @@ public class PlayerServlet extends HttpServlet {
                     String commentText = request.getParameter("editComment");
                     String commentId = request.getParameter("editCommentId");
                     int i = playerDB.editComment(userId, playerID, commentText, commentId);
-
                 }//end of Edit Comments Funtionality.
+                
+                
                 //Start remove Comments Functionality
                 else if (action.equals("Remove")) {
                     String commentId = request.getParameter("removeCommentId");
                     int i = playerDB.removeComment(commentId);
                 }
             }
-
             nValues = playerDB.playerStats(playerID);
             request.setAttribute("playerValues", nValues);
             if (playerDB.commentsExist(playerID)) { //checks if comments are available for display on this page
@@ -95,12 +92,10 @@ public class PlayerServlet extends HttpServlet {
             request.setAttribute("player", playerID);
 
         } else {
-            eMsg.setMsg("Sorry but an error occured with your request for a certain Player :( sorry!");
-            request.setAttribute("ErrorMessage", eMsg);
+            util.errorRedirect(request, "Sorry but an error occured with your request for a certain Player :( sorry!");
             util.forwardRequest(request, response, "/WEB-INF/error.jsp");
 
         }
-
         util.forwardRequest(request, response, "/WEB-INF/players.jsp");
 
     }

@@ -7,12 +7,10 @@ package servlets;
 
 import beans.AdminValues;
 import beans.ClubValues;
-import beans.ErrorMessage;
 import beans.LeagueValues;
 import beans.NationValues;
 import beans.PlayerValues;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -39,12 +37,14 @@ public class AdminServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
 
         /*
-        MEEZO IF YOU ADD ANYTHING TO THIS PAGE BE VERY CAREFUL. There are a LOT OF parameters available in this page and you could get
+        MEEZO IF YOU ADD ANYTHING TO THIS PAGE BE VERY CAREFUL. There are a LOT OF parameters in this page and you could get
         name collisions. TALK TO ME FIRST if you add anything here!!!! - Justin
          */
         response.setContentType("text/html;charset=UTF-8");
@@ -59,9 +59,7 @@ public class AdminServlet extends HttpServlet {
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
         if (session.getAttribute("admin") == null) { //First Check to determine if user Accessing this page is an admin or not. Security check.
-            ErrorMessage eMsg = new ErrorMessage();
-            eMsg.setMsg("You tried Accessing Admin page without Admin Rights! Please try again");
-            request.setAttribute("ErrorMessage", eMsg);
+            util.errorRedirect(request, "You tried Accessing Admin page without Admin Rights! Please try again");
             util.forwardRequest(request, response, "WEB-INF/error.jsp");
         } else if (action == null) {          //If user Visiting /Admin page via Admin Link.
             adminMsg.setMsg("Welcome Admin. Please pick an Option to do!");
@@ -82,6 +80,8 @@ public class AdminServlet extends HttpServlet {
             }
 
         } //End Removing Users Functionality.
+        
+        
         //Start Add User Functionality.
         else if (action.equals("addUser")) {
             String addUserName = request.getParameter("addUserName");
@@ -93,8 +93,9 @@ public class AdminServlet extends HttpServlet {
             } else {
                 adminMsg.setMsg("There was an error in registering " + addUserName);
             }
-
         }//End of Adding Users Functionality.
+        
+        
         //Start Get Users Password Functionality
         else if (action.equals("retrievePassword")) {
             String getUserName = request.getParameter("retrievePassword");
@@ -107,31 +108,34 @@ public class AdminServlet extends HttpServlet {
             }
 
         }//End of Get user Password Functionality.
+        
+        
         //Start addAdmin Functionality
         else if (action.equals("addAdmin")) {
             String addAdmin = request.getParameter("addAdmin");
             if (adminDB.usernameExist(addAdmin)) {
                 if (!adminDB.userTypeAdmin(addAdmin)) {
                     if (adminDB.addAdminUser(addAdmin) == 1) {
+                        //made Admin
                         adminMsg.setMsg("You Sucessfully made " + addAdmin + " a user with Administration rights");
                     } else {
                         adminMsg.setMsg("Sorry but an error occured trying to make " + addAdmin + " an admin...");
                     }
                 } else {
                     adminMsg.setMsg("Sorry but that username is already an Admin!");
-                }
-                //make Admin
+                }                
             } else {
                 adminMsg.setMsg("Sorry but that username doesn't exist!");
             }
-
         } // End addAdmin Functionality.
+        
+        
         //Start removeAdmin functionality.
         else if (action.equals("removeAdmin")) {
             String removeAdmin = request.getParameter("removeAdmin");
             if (adminDB.usernameExist(removeAdmin)) {
                 if (adminDB.userTypeAdmin(removeAdmin)) {
-                    if (adminDB.removeAdminUser(removeAdmin) == 1) {
+                    if (adminDB.removeAdminUser(removeAdmin) == 1) { //Remove Admin Privledges.
                         adminMsg.setMsg("You Sucessfully took away " + removeAdmin + "'s Administration rights");
                     } else {
                         adminMsg.setMsg("Sorry but an error occured trying to take away " + removeAdmin + "'s admin rights...");
@@ -139,12 +143,12 @@ public class AdminServlet extends HttpServlet {
                 } else {
                     adminMsg.setMsg("Sorry but that username is already a regular user!");
                 }
-
             } else {
                 adminMsg.setMsg("Sorry but that username doesn't exist!");
             }
-
         }//End of Remove Admin Functionality
+        
+        
         //start of Add Player Functionality
         else if (action.equals("addPlayer")) {
             String addPlayerName = request.getParameter("addPlayerFirstName") + " " + request.getParameter("addPlayerLastName");
@@ -157,6 +161,7 @@ public class AdminServlet extends HttpServlet {
                 String addPlayerHeight = request.getParameter("addPlayerHeight");
                 String addPlayerNumber = request.getParameter("addPlayerNumber");
                 String addPlayerFoot = request.getParameter("addPlayerFoot");
+                //Line Below calling Function to add Player into Database.
                 if (adminDB.addPlayer(addPlayerNation, addPlayerClub, addPlayerName, addPlayerDate, addPlayerPicture, addPlayerPosition, addPlayerHeight, addPlayerNumber, addPlayerFoot) == 1) {
                     adminMsg.setMsg("You Sucessfully added " + addPlayerName + " To the database");
                 } else {
@@ -169,6 +174,8 @@ public class AdminServlet extends HttpServlet {
                 adminMsg.setMsg("Sorry but that Player is already entered in the database!");
             }
         }//End of Add Player Functionality.
+        
+        
         //Start Edit Player Functionality.
         else if (action.equals("editPlayer")) {
             String editPlayerName = request.getParameter("editPlayerName");
@@ -180,23 +187,26 @@ public class AdminServlet extends HttpServlet {
             String editPlayerHeight = request.getParameter("editPlayerHeight");
             String editPlayerNumber = request.getParameter("editPlayerNumber");
             String editPlayerFoot = request.getParameter("editPlayerFoot");
-
+            //Line Below calling Function to edit Player in Database.
             if (adminDB.editPlayer(editPlayerNation, editPlayerClub, editPlayerName, editPlayerDate, editPlayerPicture, editPlayerPosition, editPlayerHeight, editPlayerNumber, editPlayerFoot) == 1) {
                 adminMsg.setMsg("Successfully updated " + editPlayerName + " in the database");
             } else {
                 adminMsg.setMsg("Sorry but an error occured updating " + editPlayerName + " in the database");
             }
         }//End of Edit Player Functionality.
+        
+        
         //Start Remove Player Functionality.
         else if (action.equals("removePlayer")) {
             String removePlayer = request.getParameter("removePlayer");
             if (adminDB.removePlayer(removePlayer) == 1) {
                 adminMsg.setMsg("Successfully Removed " + removePlayer + " From the database");
-
             } else {
                 adminMsg.setMsg("Sorry but an error occured removing " + removePlayer + " from the database");
             }
         }//End Remove Player Functionality.
+        
+        
         //Start add League Functionality.
         else if (action.equals("addLeague")) {
             String addLeagueName = request.getParameter("addLeagueName");
@@ -209,10 +219,9 @@ public class AdminServlet extends HttpServlet {
             } else {
                 adminMsg.setMsg("Sorry but " + addLeagueName + " already exists");
             }
-
-//            leagueValues = adminDB.allLeagues();
-//            request.setAttribute("leagues", leagueValues);
         }//End Add League Functionality.
+        
+        
         //Start Remove League Functionality.
         else if (action.equals("removeLeague")) {
             String removeLeagueName = request.getParameter("removeLeagueName");
@@ -222,6 +231,8 @@ public class AdminServlet extends HttpServlet {
                 adminMsg.setMsg("Sorry but an error occured removing" + removeLeagueName);
             }
         }//End Remove League Functionality.
+        
+        
         //Start Add Nation Functionality.
         else if (action.equals("addNation")) {
             String addNationName = request.getParameter("addNationName");
@@ -235,6 +246,8 @@ public class AdminServlet extends HttpServlet {
                 adminMsg.setMsg("Sorry but " + addNationName + " Is already in the database!");
             }
         }//End Add Nation Functionality.
+        
+        
         //Start Remove Nation Functionality.
         else if (action.equals("removeNation")) {
             String removeNationName = request.getParameter("removeNationName");
@@ -243,8 +256,8 @@ public class AdminServlet extends HttpServlet {
             } else {
                 adminMsg.setMsg("Sorry but an error occured removing " + removeNationName + " from the database!");
             }
-
         }//End remove Nation Functionality.
+        
         
         //Start Add Club Functionality.
         else if(action.equals("addClub")){
@@ -258,10 +271,9 @@ public class AdminServlet extends HttpServlet {
                 }
             }else{
                 adminMsg.setMsg("Sorry but " + addClubName + " Already Exists!");
-            }
-            
-            
+            }                        
         }//End Add Club Functionality.
+        
         
         //Start Edit Club Functionality.
         else if(action.equals("editClub")){
@@ -274,6 +286,7 @@ public class AdminServlet extends HttpServlet {
             }                  
         }//End Edit Club Functionality.
         
+        
         //Start Remove Club Functionality.
         else if(action.equals("removeClub")){
             String removeClubName = request.getParameter("removeClubName");
@@ -281,11 +294,11 @@ public class AdminServlet extends HttpServlet {
                 adminMsg.setMsg("Sucessfully removed " + removeClubName + " from the database");
             } else {
                 adminMsg.setMsg("Sorry but an error occured removing" + removeClubName);
-            }
-            
-            
+            }           
         }//End remove Club Functionality.
         
+        
+        //Querying Database for new Value changes and Setting them in jsp view.        
         allPlayers = adminDB.allPlayers();
         nationValues = adminDB.allNations();
         clubsValues = adminDB.allClubs();
@@ -295,9 +308,9 @@ public class AdminServlet extends HttpServlet {
         request.setAttribute("leagues", leagueValues);
         request.setAttribute("players", allPlayers);
 
+        
         request.setAttribute("adminMessage", adminMsg);
         util.forwardRequest(request, response, "WEB-INF/admin.jsp");
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

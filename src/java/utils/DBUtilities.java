@@ -503,8 +503,8 @@ public class DBUtilities {
     //Search Functionality
     /**
      *
-     * @param name the
-     * @return
+     * @param name the players with a name like param name to be queried
+     * @return an arrayList of playerValues to be stored in a bean containing all the players stats containing the name "name"
      * @throws ClassNotFoundException
      * @throws SQLException
      */
@@ -542,8 +542,8 @@ public class DBUtilities {
 
     /**
      *
-     * @param name
-     * @return
+     * @param name The players name to be queried, Used with the search function.
+     * @return Returns true if players found, false if non found.
      * @throws ClassNotFoundException
      * @throws SQLException
      */
@@ -558,6 +558,14 @@ public class DBUtilities {
     }
 
     //admin Page Functionality.
+
+    /**
+     *
+     * @param username The user to be removed from the database.
+     * @return int returns 1 if executed successfully
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public int removeUser(String username) throws ClassNotFoundException, SQLException {
 
         int result = DBconnection.db.insert("DELETE FROM users WHERE User_username='" + username + "';");
@@ -565,6 +573,13 @@ public class DBUtilities {
 
     }
 
+    /**
+     *
+     * @param username the username associated with the password
+     * @return String returns the password of the queried username
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public String getUserPassword(String username) throws ClassNotFoundException, SQLException {
 
         ResultSet resultSet = DBconnection.db.query("SELECT User_password FROM users WHERE User_username='" + username + "'");
@@ -576,6 +591,13 @@ public class DBUtilities {
         return "";
     }
 
+    /**
+     *
+     * @param username The username to be granted admin priviledges 
+     * @return int returns 1 if executed successfully
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public int addAdminUser(String username) throws ClassNotFoundException, SQLException {
 
         int result = DBconnection.db.insert("UPDATE users SET User_type=0 WHERE User_username='" + username + "';");
@@ -583,6 +605,13 @@ public class DBUtilities {
 
     }
 
+    /**
+     *
+     * @param username The user Name to be revoked of admin rights from the database.
+     * @return int returns 1 if executed successfully
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public int removeAdminUser(String username) throws ClassNotFoundException, SQLException {
 
         int result = DBconnection.db.insert("UPDATE users SET User_type=1 WHERE User_username='" + username + "';");
@@ -590,6 +619,13 @@ public class DBUtilities {
 
     }
 
+    /**
+     *
+     * @param name The player name to query.
+     * @return True if player name is found, false if not.
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public boolean playerExist(String name) throws ClassNotFoundException, SQLException {
 
         ResultSet resultSet = DBconnection.db.query("SELECT * FROM players WHERE player_name='" + name + "';");
@@ -600,6 +636,21 @@ public class DBUtilities {
         return false;
     }
 
+    /**
+     *
+     * @param nation The players reference to which nation to be inserted into the row
+     * @param club The players reference to which club to be inserted into the row
+     * @param playerName The players name to be inserted into the row
+     * @param birthday The players Birthday of form yyyy-mm-dd to be inserted into the row
+     * @param picture The players Picture Reference to be inserted into the row
+     * @param position The players Position to be inserted into the row
+     * @param height The players height to be inserted into the row
+     * @param number the players Number to be inserted into the row
+     * @param foot the players foot to be inserted into the row
+     * @return int Returns 1 if executed successfully
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public int addPlayer(String nation, String club, String playerName, String birthday, String picture, String position, String height, String number, String foot) throws ClassNotFoundException, SQLException {
 
         int result = DBconnection.db.insert("INSERT INTO players (`Player_nation_id`, `Player_club_id`, `Player_name`, `Player_birthday`, `Player_picture`, `Player_position`, `Player_height`, `Player_number`, `Player_foot`)"
@@ -608,6 +659,13 @@ public class DBUtilities {
 
     }
 
+    /**
+     *
+     * @param nation The nations name used to reference the corresponding nation Id.
+     * @return String. The nation Id to be returned
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public String getNationId(String nation) throws ClassNotFoundException, SQLException {
 
         ResultSet resultSet = DBconnection.db.query("SELECT Nation_id FROM nations WHERE Nation_name='" + nation + "';");
@@ -619,6 +677,13 @@ public class DBUtilities {
         return "";
     }
 
+    /**
+     *
+     * @param club The club name.
+     * @return String The club Id of the referenced club name
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public String getClubId(String club) throws ClassNotFoundException, SQLException {
 
         ResultSet resultSet = DBconnection.db.query("SELECT Club_id FROM clubs WHERE Club_name='" + club + "';");
@@ -630,6 +695,13 @@ public class DBUtilities {
         return "";
     }
 
+    /**
+     *
+     * @param name The players Name to be used to reference the players picture
+     * @return String The players Picture
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public String getPlayerPicture(String name) throws ClassNotFoundException, SQLException {
 
         ResultSet resultSet = DBconnection.db.query("SELECT Player_picture FROM players WHERE Player_name='" + name + "';");
@@ -641,6 +713,13 @@ public class DBUtilities {
         return "";
     }
 
+    /**
+     *
+     * @param name The name of the player to be removed.
+     * @return int Returns 1 if executed successfully
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public int removePlayer(String name) throws ClassNotFoundException, SQLException {
 
         int result = DBconnection.db.insert("DELETE FROM players WHERE Player_name='" + name + "';");
@@ -648,6 +727,21 @@ public class DBUtilities {
 
     }
 
+    /**
+     *
+     * @param nation The players reference to which nation to be inserted into the row
+     * @param club The players reference to which club to be inserted into the row
+     * @param playerName The players name to be inserted into the row
+     * @param birthday The players Birthday of form yyyy-mm-dd to be inserted into the row
+     * @param picture The players Picture Reference to be inserted into the row
+     * @param position The players Position to be inserted into the row
+     * @param height The players height to be inserted into the row
+     * @param number the players Number to be inserted into the row
+     * @param foot the players foot to be inserted into the row
+     * @return int Returns 1 if executed successfully
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public int editPlayer(String nation, String club, String playerName, String birthday, String picture, String position, String height, String number, String foot) throws ClassNotFoundException, SQLException {
 
         int result = DBconnection.db.insert("UPDATE players SET Player_nation_id=" + nation + ", Player_club_id=" + club + ", Player_birthday='" + birthday + "', "
@@ -656,6 +750,13 @@ public class DBUtilities {
 
     }
 
+    /**
+     *
+     * @param league The league name used to find out the associated league Id to it.
+     * @return Returns the League Id as a String.
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public String getLeagueId(String league) throws ClassNotFoundException, SQLException {
 
         ResultSet resultSet = DBconnection.db.query("SELECT League_id FROM leagues WHERE League_name='" + league + "';");
@@ -667,6 +768,13 @@ public class DBUtilities {
         return "";
     }
 
+    /**
+     *
+     * @param leagueName the league name used to add a league to the table.
+     * @return int Returns 1 if executed successfully
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public int addLeague(String leagueName) throws ClassNotFoundException, SQLException {
 
         int result = DBconnection.db.insert(
@@ -676,6 +784,13 @@ public class DBUtilities {
         return result;
     }
 
+    /**
+     *
+     * @param leagueName The league name used to reference which league to remove.
+     * @return int Returns 1 if executed successfully
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public int removeLeague(String leagueName) throws ClassNotFoundException, SQLException {
 
         int result = DBconnection.db.insert(
@@ -685,6 +800,13 @@ public class DBUtilities {
         return result;
     }
 
+    /**
+     *
+     * @param nationName The Nation name to be used when adding a new nation to the nation table.
+     * @return int Returns 1 if executed sucessfully
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public int addNation(String nationName) throws ClassNotFoundException, SQLException {
 
         int result = DBconnection.db.insert(
@@ -694,6 +816,13 @@ public class DBUtilities {
         return result;
     }
 
+    /**
+     *
+     * @param nationName The nation Named used to reference which row to delete.
+     * @return int Returns 1 if executed successfully
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public int removeNation(String nationName) throws ClassNotFoundException, SQLException {
 
         int result = DBconnection.db.insert(
@@ -703,6 +832,14 @@ public class DBUtilities {
         return result;
     }
 
+    /**
+     *
+     * @param clubName The clubName to be added to the clubs table.
+     * @param leagueId The League Id field required for the clubs table.
+     * @return int Returns 1 if executed sucdessfully
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public int addClub(String clubName, String leagueId) throws ClassNotFoundException, SQLException {
 
         int result = DBconnection.db.insert(
@@ -712,6 +849,14 @@ public class DBUtilities {
         return result;
     }
 
+    /**
+     *
+     * @param clubName The clubname to be updated and also used to reference the row in the table.
+     * @param leagueId The league Id to be updated
+     * @return int Returns 1 if executed successfully
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public int editClub(String clubName, String leagueId) throws ClassNotFoundException, SQLException {
 
         int result = DBconnection.db.insert("UPDATE clubs SET Club_league_id=" + leagueId + ", Club_name='" + clubName + "' WHERE Club_name='" + clubName + "';");
@@ -719,6 +864,13 @@ public class DBUtilities {
         return result;
     }
 
+    /**
+     *
+     * @param clubName The Club name used to delete the club from the clubs table.
+     * @return int Returns 1 if executed sucessfully
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public int removeClub(String clubName) throws ClassNotFoundException, SQLException {
 
         int result = DBconnection.db.insert(
@@ -728,6 +880,13 @@ public class DBUtilities {
         return result;
     }
 
+    /**
+     *
+     * @param id The player_id from the page requested ie(Players?p=2) id would equal 2.
+     * @return An ArrayList of Comment Values stored in a bean. To be used on a jsp view page.
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public ArrayList<CommentValues> playerComments(String id) throws ClassNotFoundException, SQLException {
         ArrayList<CommentValues> results = new ArrayList<CommentValues>();
 
@@ -752,6 +911,13 @@ public class DBUtilities {
         return results;
     }
 
+    /**
+     *
+     * @param id the comment id to search for in the database.
+     * @return true if Found, false if not
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public boolean commentsExist(String id) throws ClassNotFoundException, SQLException {
 
         ResultSet resultSet = DBconnection.db.query("SELECT * FROM comments WHERE Comment_player_id='" + id + "';");
@@ -762,6 +928,13 @@ public class DBUtilities {
         return false;
     }
 
+    /**
+     *
+     * @param id The player id to search for in the database.
+     * @return true if found, false if not
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public boolean playerFound(String id) throws ClassNotFoundException, SQLException {
         ResultSet resultSet = DBconnection.db.query("SELECT * FROM players WHERE Player_id ='" + id + "' ");
 
@@ -771,6 +944,16 @@ public class DBUtilities {
         return false;
     }
 
+    /**
+     *
+     * @param userId The user Id of the user making the comment
+     * @param playerId The player Id of the player being commented on
+     * @param commentTxt The comment written
+     * @param commentDate The date the comment was written.
+     * @return int Returns 1 if executed successfully
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public int addComment(String userId, String playerId, String commentTxt, String commentDate) throws ClassNotFoundException, SQLException {
 
         int result = DBconnection.db.insert(
@@ -780,6 +963,13 @@ public class DBUtilities {
         return result;
     }
 
+    /**
+     *
+     * @param username The username of the user 
+     * @return String returns the user Id of the user queried
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public String getUserId(String username) throws ClassNotFoundException, SQLException {
 
         ResultSet resultSet = DBconnection.db.query("SELECT User_id FROM users WHERE User_username='" + username + "'");
@@ -791,6 +981,16 @@ public class DBUtilities {
         return "";
     }
 
+    /**
+     *
+     * @param userId The user Id editing the comment
+     * @param playerId The player Id of the comment being edited.
+     * @param commentTxt The new comment to be used.
+     * @param commentId The comment Id to reference the right comment to edit.
+     * @return int Returns 1 if executed sucessfully
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public int editComment(String userId, String playerId, String commentTxt, String commentId) throws ClassNotFoundException, SQLException {
 
         int result = DBconnection.db.insert(
@@ -799,6 +999,13 @@ public class DBUtilities {
         return result;
     }
 
+    /**
+     *
+     * @param commentId The id of the comment to be removed.
+     * @return int Returns 1 if executed sucessfully
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public int removeComment(String commentId) throws ClassNotFoundException, SQLException {
 
         int result = DBconnection.db.insert(

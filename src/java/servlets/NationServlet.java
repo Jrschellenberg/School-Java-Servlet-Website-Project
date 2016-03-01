@@ -7,9 +7,7 @@ package servlets;
 
 import utils.DBUtilities;
 import utils.Utilities;
-import beans.ErrorMessage;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import beans.*;
 import java.util.ArrayList;
+
 /**
  *
  * @author Justin
@@ -38,42 +37,22 @@ public class NationServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
-        
-        DBUtilities nationDB = DBUtilities.getInstance();
-
-        ArrayList<NationValues> nationValues = new  ArrayList<NationValues>();
-        ArrayList<PlayerValues> playersValues = new  ArrayList<PlayerValues>();
-        ErrorMessage message = new ErrorMessage();
-        
         Utilities util = Utilities.getInstance();
-              
+        DBUtilities nationDB = DBUtilities.getInstance();
+        ArrayList<NationValues> nationValues = new ArrayList<NationValues>();
+        ArrayList<PlayerValues> playersValues = new ArrayList<PlayerValues>();
         String nationId = request.getParameter("n");
-        
-        if(nationId == null){
-            
+        if (nationId == null) {
             nationValues = nationDB.allNations();
             request.setAttribute("nations", nationValues);
-            util.forwardRequest(request, response, "/WEB-INF/nations.jsp");
-             
-        }
-        else if(nationDB.nationFound(nationId)){
-            
+        } else if (nationDB.nationFound(nationId)) {
             playersValues = nationDB.nationPlayers(nationId);
             request.setAttribute("players", playersValues);
-            util.forwardRequest(request, response, "/WEB-INF/nations.jsp");
-            
-        }else{
-            
-             message.setMsg("Sorry No results found !");
-             request.setAttribute("ErrorMessage", message);
-             util.forwardRequest(request, response, "/WEB-INF/error.jsp");
-             
+        } else {
+            util.errorRedirect(request, "Sorry No results found !");
+            util.forwardRequest(request, response, "/WEB-INF/error.jsp");
         }
-        
-        
-        
-        
-
+        util.forwardRequest(request, response, "/WEB-INF/nations.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

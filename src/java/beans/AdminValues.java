@@ -12,14 +12,25 @@ package beans;
 public class AdminValues {
     private String msg;
     
+    /**
+     *
+     */
     public AdminValues(){
         msg = "";
     }
 
+    /**
+     *
+     * @return returns the String msg
+     */
     public String getMsg() {
         return msg;
     }
 
+    /**
+     *
+     * @param msg Sets the message in the bean with this parameter.
+     */
     public void setMsg(String msg) {
         this.msg = msg;
     }
