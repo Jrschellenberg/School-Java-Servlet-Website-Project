@@ -37,7 +37,7 @@
 
         <div class="col-md-6">
             <h1 class="single-title" style="position: relative;top:35px">
-                <img src="http://futhead.cursecdn.com/static/img/16/nations/38.png" alt="" style="width:40px;height:40px">
+                <img src="<%=request.getContextPath()%>/images/nations/<jsp:getProperty name="playerValues" property="playerNationPicture" />" alt="" style="width:45px;height:25px">
                 <jsp:getProperty name="playerValues" property="playerName" />
             </h1>
         </div>
@@ -59,7 +59,7 @@
         <div style="position: relative;top:-18px;left:4%;background: url(<%=request.getContextPath()%>/images/player-background.jpg) no-repeat;height:37px; width:160px;"></div>
         <div class="row">
             <div class="col-md-3 text-center">   
-                <img src="http://futhead.cursecdn.com/static/img/16/clubs/243.png" style="width:225px;height:225px">
+                <img src="<%=request.getContextPath()%>/images//clubs/<jsp:getProperty name="playerValues" property="playerClubPicture" />" style="width:225px;height:225px">
             </div>
             <div class="col-md-9 tab-content">
                 <div class="row tab-pane fade in active" id="about">
@@ -70,18 +70,18 @@
                     </div>
 
                     <div class="row" style="padding-bottom:1px;border-bottom: #E7E7E7 solid 1px;margin: 10px 0 20px 0;">
-                        <div class="col-md-6">Age: </div>
+                        <div class="col-md-6">BirthDay: <jsp:getProperty name="playerValues" property="playerBirthday" /></div>
                         <div class="col-md-6">Position: <jsp:getProperty name="playerValues" property="playerPosition" /></div>
                     </div>
 
                     <div class="row" style="padding-bottom:1px;border-bottom: #E7E7E7 solid 1px;margin: 10px 0 20px 0;">
-                        <div class="col-md-6">BirthDay: <jsp:getProperty name="playerValues" property="playerBirthday" /></div>
+                        <div class="col-md-6">Number: <jsp:getProperty name="playerValues" property="playerNumber" /></div>
                         <div class="col-md-6">Height: <jsp:getProperty name="playerValues" property="playerHeight" /></div>
                     </div>
 
                     <div class="row" style="padding-bottom:1px;border-bottom: #E7E7E7 solid 1px;margin: 10px 0 20px 0;">
                         <div class="col-md-6">Foot: <jsp:getProperty name="playerValues" property="playerFoot" /></div>
-                        <div class="col-md-6">Number: <jsp:getProperty name="playerValues" property="playerNumber" /></div>
+                        
                     </div>
 
                 </div> 

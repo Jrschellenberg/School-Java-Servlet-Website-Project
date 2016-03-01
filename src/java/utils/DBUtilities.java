@@ -113,12 +113,14 @@ public class DBUtilities {
                     "SELECT * FROM clubs WHERE Club_id='" + resultSet.getInt("Player_club_id") + "' ");
             while (resultSetPlayerClub.next()) {
                 values.setPlayerClub(resultSetPlayerClub.getString("club_name"));
+                values.setPlayerClubPicture(resultSetPlayerClub.getString("club_picture"));
             }
 
             ResultSet resultSetPlayerNation = DBconnection.db.query(
                     "SELECT * FROM nations WHERE Nation_id='" + resultSet.getInt("Player_nation_id") + "' ");
             while (resultSetPlayerNation.next()) {
                 values.setPlayerNation(resultSetPlayerNation.getString("nation_name"));
+                values.setPlayerNationPicture(resultSetPlayerNation.getString("nation_picture"));
             }
 
             results.add(values);
@@ -233,12 +235,14 @@ public class DBUtilities {
                     "SELECT * FROM clubs WHERE Club_id='" + resultSet.getInt("Player_club_id") + "' ");
             while (resultSetPlayerClub.next()) {
                 values.setPlayerClub(resultSetPlayerClub.getString("club_name"));
+                values.setPlayerClubPicture(resultSetPlayerClub.getString("club_picture"));
             }
 
             ResultSet resultSetPlayerNation = DBconnection.db.query(
                     "SELECT * FROM nations WHERE Nation_id='" + resultSet.getInt("Player_nation_id") + "' ");
             while (resultSetPlayerNation.next()) {
                 values.setPlayerNation(resultSetPlayerNation.getString("nation_name"));
+                values.setPlayerNationPicture(resultSetPlayerNation.getString("nation_picture"));
             }
 
             results.add(values);
@@ -320,12 +324,14 @@ public class DBUtilities {
                     "SELECT * FROM clubs WHERE Club_id='" + resultSet.getInt("Player_club_id") + "' ");
             while (resultSetPlayerClub.next()) {
                 values.setPlayerClub(resultSetPlayerClub.getString("club_name"));
+                values.setPlayerClubPicture(resultSetPlayerClub.getString("club_picture"));
             }
 
             ResultSet resultSetPlayerNation = DBconnection.db.query(
                     "SELECT * FROM nations WHERE Nation_id='" + resultSet.getInt("Player_nation_id") + "' ");
             while (resultSetPlayerNation.next()) {
                 values.setPlayerNation(resultSetPlayerNation.getString("nation_name"));
+                values.setPlayerNationPicture(resultSetPlayerNation.getString("nation_picture"));
             }
 
             results.add(values);
@@ -365,12 +371,14 @@ public class DBUtilities {
                     "SELECT * FROM clubs WHERE Club_id='" + resultSet.getInt("Player_club_id") + "' ");
             while (resultSetPlayerClub.next()) {
                 values.setPlayerClub(resultSetPlayerClub.getString("club_name"));
+                values.setPlayerClubPicture(resultSetPlayerClub.getString("club_picture"));
             }
 
             ResultSet resultSetPlayerNation = DBconnection.db.query(
                     "SELECT * FROM nations WHERE Nation_id='" + resultSet.getInt("Player_nation_id") + "' ");
             while (resultSetPlayerNation.next()) {
                 values.setPlayerNation(resultSetPlayerNation.getString("nation_name"));
+                values.setPlayerNationPicture(resultSetPlayerNation.getString("nation_picture"));
             }
 
             results.add(values);
@@ -405,12 +413,14 @@ public class DBUtilities {
                     "SELECT * FROM clubs WHERE Club_id='" + resultSet.getInt("Player_club_id") + "' ");
             while (resultSetPlayerClub.next()) {
                 values.setPlayerClub(resultSetPlayerClub.getString("club_name"));
+                values.setPlayerClubPicture(resultSetPlayerClub.getString("club_picture"));
             }
 
             ResultSet resultSetPlayerNation = DBconnection.db.query(
                     "SELECT * FROM nations WHERE Nation_id='" + resultSet.getInt("Player_nation_id") + "' ");
             while (resultSetPlayerNation.next()) {
                 values.setPlayerNation(resultSetPlayerNation.getString("nation_name"));
+                values.setPlayerNationPicture(resultSetPlayerNation.getString("nation_picture"));
             }
         }
 
@@ -526,12 +536,14 @@ public class DBUtilities {
                     "SELECT * FROM clubs WHERE Club_id='" + resultSet.getInt("Player_club_id") + "' ");
             while (resultSetPlayerClub.next()) {
                 values.setPlayerClub(resultSetPlayerClub.getString("club_name"));
+                values.setPlayerClubPicture(resultSetPlayerClub.getString("club_picture"));
             }
 
             ResultSet resultSetPlayerNation = DBconnection.db.query(
                     "SELECT * FROM nations WHERE Nation_id='" + resultSet.getInt("Player_nation_id") + "' ");
             while (resultSetPlayerNation.next()) {
                 values.setPlayerNation(resultSetPlayerNation.getString("nation_name"));
+                values.setPlayerNationPicture(resultSetPlayerNation.getString("nation_picture"));
             }
 
             results.add(values);

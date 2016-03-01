@@ -2,7 +2,7 @@
 <a style="color:#4d4d4d;" href="<%=request.getContextPath()%>/Players?p=${p.playerId}">
     <div style="background: url(<%=request.getContextPath()%>/images/playerCard-U.png)  no-repeat;height:110px; width:155px;z-index:-1;">
         <!-- club background -->
-        <div style="border-radius:0 33px 0 0;background: url(http://futhead.cursecdn.com/static/img/16/clubs/243.png)  no-repeat 16px -30px; opacity:0.2;height:120px; width:150px;background-size: 180px 180px;position:relative;top:1px;"></div>
+        <div style="border-radius:0 33px 0 0;background: url(<%=request.getContextPath()%>/images/clubs/${p.playerClubPicture})  no-repeat 16px -30px; opacity:0.2;height:120px; width:150px;background-size: 180px 180px;position:relative;top:1px;"></div>
     </div>
 
     <div style="position:absolute; top:20px; z-index:2;right:auto;left:10px;height:164px; width:155px;">
@@ -13,7 +13,7 @@
             <img src="<%=request.getContextPath()%>/images/players/${p.playerPicture}" style="width:90px;height:90px;"> 
 
             <!-- national_img -->
-            <img src="http://futhead.cursecdn.com/static/img/16/nations/38.png" alt="" style="width:45px;height:45px">
+            <img src="<%=request.getContextPath()%>/images/nations/${p.playerNationPicture}" alt="" style="width:45px;height:25px">
 
         </div>
 

@@ -21,6 +21,8 @@ public class PlayerValues {
     private String playerFoot;
     private String playerNation;
     private String playerClub;
+    private String playerNationPicture;
+    private String playerClubPicture;
     
     /**
      *
@@ -36,6 +38,8 @@ public class PlayerValues {
         playerFoot = "";
         playerNation = "";
         playerClub = "";
+        playerNationPicture= "";
+        playerClubPicture = "";
     }
 
     /**
@@ -196,6 +200,38 @@ public class PlayerValues {
      */
     public void setPlayerClub(String playerClub) {
         this.playerClub = playerClub;
+    }
+    
+        /**
+     *
+     * @return returns the player Nation id stored in the bean.
+     */
+    public String getPlayerNationPicture() {
+        return playerNationPicture;
+    }
+
+    /**
+     *
+     * @param playerNationPicture Var used to set the player Nation id stored in the bean.
+     */
+    public void setPlayerNationPicture(String playerNationPicture) {
+        this.playerNationPicture = playerNationPicture;
+    }
+    
+    /**
+     *
+     * @return returns the player Club stored in the bean.
+     */
+    public String getPlayerClubPicture() {
+        return playerClubPicture;
+    }
+
+    /**
+     *
+     * @param playerClubPicture; Var used to set the player Club and store it in the bean.
+     */
+    public void setPlayerClubPicture(String playerClubPicture) {
+        this.playerClubPicture = playerClubPicture;
     }
     
 }

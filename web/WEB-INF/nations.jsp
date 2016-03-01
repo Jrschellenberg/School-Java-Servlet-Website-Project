@@ -42,8 +42,10 @@
 <div class="container-fluid"> 
 
     <div class="text-center" style="background-color:#BE1418;width:100%;border-bottom: #960C0F solid 5px;margin: 30px 0 10px 0"> 
-        <div style="margin: 0 auto;width:1000px;font-size: 92px; color: #fff"> 
+        <div style="margin: 0 auto;width:1000px;font-size: 72px; color: #fff"> 
+            <img src="<%=request.getContextPath()%>/images/nations/<c:out value="${players[0].playerNationPicture}"/>" alt="" style="width:71px;height:45px">
             <c:out value="${players[0].playerNation}"/> 
+            <img src="<%=request.getContextPath()%>/images/nations/<c:out value="${players[0].playerNationPicture}"/>" alt="" style="width:71px;height:45px">
         </div>
     </div>
 

@@ -55,7 +55,7 @@
                     <div class="url_table">
                         <a href="<%=request.getContextPath()%>/Clubs?c=${c.clubId}">
                             <div>
-                                <img src="http://futhead.cursecdn.com/static/img/16/clubs/243.png" style="width:16px;height:16px">
+                                <img src="<%=request.getContextPath()%>/images/clubs/${c.clubPicture}" style="width:16px;height:16px">
                                 <h2>${c.clubName}</h2>
                             </div>
                         </a>
