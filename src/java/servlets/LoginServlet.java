@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         if (action == null) {
-            valueObject.setMsg("Welcome to Shoot 24! Please use the form below to login. If you haven't registered, please do so on our register page!");
+            valueObject.setMsg("Welcome to Shoot 24! <br />Please use the form below to login. <br />If you haven't registered, please do so on our register page!");
             util.setLastLoginCookie(lastLogin, request);
         } //Login Processing 
         else if (action.equals("Login")) {//If user clicked Login Button.          
@@ -92,7 +92,7 @@ public class LoginServlet extends HttpServlet {
             session.invalidate();
             // session.removeAttribute("username");
             // session.removeAttribute("admin");
-            valueObject.setMsg("Thanks For Visiting!! you have successfully logged out");
+            valueObject.setMsg("Thanks For Visiting!! <br/> you have successfully logged out");
             util.setLastLoginCookie(lastLogin, request);
         } else {
             util.errorRedirect(request, "Sorry but we encountered an error Trying to log you in!");
