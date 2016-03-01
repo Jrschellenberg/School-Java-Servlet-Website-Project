@@ -7393,3 +7393,38 @@ color: #fff;
 .url_table>a:active h2 {
     color: #BD1418;
 }
+
+
+/************************/
+/* login & rigester form  */
+input.user { 
+	background: #fff;
+	border:2px #CCC solid;
+	padding:10px;
+        font-size: 14px;
+        width:200px;
+        border-radius:20px;
+	-webkit-border-radius:20px;
+	-moz-border-radius:20px;
+        margin-left: 5px;
+ }
+ 
+ input.userButton {
+	background-color:#BE1418;
+	color:#fff;
+	font-size:18px;
+	line-height:30px;
+	border-radius:20px;
+	-webkit-border-radius:20px;
+	-moz-border-radius:20px;
+	border:0;
+	width:120px;
+	height:32px
+}    
+ input.userButton:hover {
+	background-color:#960C0F;
+}    
+
+span.help-block.form-error{
+     color: #fff;
+ }
