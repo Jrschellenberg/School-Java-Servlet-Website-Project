@@ -15,9 +15,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-6 control-label">Password (6-32 Characters)</label>
+                        <label for="inputPassword3" class="col-sm-6 control-label">Password (2-32 Characters)</label>
                         <div class="col-sm-6">
-                            <input type="password" class="form-control" id="inputPassword3" name="addPassword_confirmation" placeholder="Password" data-validation="length" data-validation-length="6-32">
+                            <input type="password" class="form-control" id="inputPassword3" name="addPassword_confirmation" placeholder="Password" data-validation="length" data-validation-length="2-32">
                         </div>
                     </div>
                     <div class="form-group">
