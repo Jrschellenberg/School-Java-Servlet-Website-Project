@@ -11,7 +11,7 @@
 
         <div class="col-sm-9 col-md-8 col-lg-11" style="float: none;display: table-cell;vertical-align: top;">
 
-            <div class="row">
+            <div class="row">  
                 <c:forEach var="p" items="${allplayers}">
                     <%@ include file="playerCard.jsp" %>
                 </c:forEach>

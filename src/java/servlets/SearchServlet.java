@@ -42,8 +42,8 @@ public class SearchServlet extends HttpServlet {
         ArrayList<PlayerValues> nValues = new ArrayList<PlayerValues>();
             
         String playerName = request.getParameter("q");
-        if (playerName == null) {
-            util.errorRedirect(request, "Please Use the search box at the top to search for a player!");
+        if (playerName == null || playerName.equals("") ) {
+            util.errorRedirect(request, "Please enter a value in the search box at the top to search for a player!");
             util.forwardRequest(request, response, "/WEB-INF/error.jsp");
         } else if (searchDB.foundPlayers(playerName)) {
             nValues = searchDB.searchPlayerStats(playerName);

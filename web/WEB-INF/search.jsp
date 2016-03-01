@@ -3,30 +3,23 @@
     <jsp:param name="title" value="Search" />
 </jsp:include>
 
-    <div class="container-fluid"> 
 
-            <div class="text-center" style="background-color:#BE1418; border-top: #960C0F solid 5px;padding: 0 0 50px 0;width:100%;margin-top: 100px"> 
+   <div class="container-fluid" style="margin: 30px 0 10px 0"> 
+    <div class="row " style="display: table;margin: 0 auto;width:1000px">
 
+        <div class="col-sm-4 col-md-8 col-lg-11" style="float: none;display: table-cell;vertical-align: top;">
+
+            <div class="row">
+                <c:forEach var="p" items="${playerValues}">
+                    <%@ include file="playerCard.jsp" %>
+                </c:forEach>
             </div>
 
-            <div class="text-center" style="background-color:#BE1418;width:100%;border-bottom: #960C0F solid 5px;"> 
-                <div style="margin: 0 auto;width:1000px">
-                    <br style="clear: left;" />
-    
-                    <c:forEach var="item" items="${playerValues}">
-                        <h1><a href="<%=request.getContextPath()%>/Players?p=${item.playerId}">${item.playerName}</a></h1>
-                    </c:forEach>
-                          
-                    <br /><br />
-                    <br style="clear: left;" />
-                    
-                </div>
-            </div>
-            <div class="text-center" style="background-color:#E8E8E8; border-bottom: #BABABA solid 5px;padding: 70px 0 10px 0;"> 
-                	
-            </div>
-            
+
+        </div>
+
     </div>
+</div>  
 
 
 
