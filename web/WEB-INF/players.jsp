@@ -110,22 +110,28 @@
 <jsp:include page="/WEB-INF/ModalIncludes/addComment.jsp" >
     <jsp:param name="p" value="${player}" />
 </jsp:include>
-<%}else{%>
+<%} else {%>
 
-<a href="<%=request.getContextPath()%>/Register" style="text-decoration:  none;"><button type="button" class="CantAddCommentButton">Register/Login to add Comments !</button></a>
+<button type="button" class="CantAddCommentButton">Register/Login to add Comments</button>
 
 <% }%>
 
 <div style="background-color: #fff;padding:10px;border-bottom: #BD1418 solid 5px;border-top: #BD1418 solid 8px;"> 
     <div class="container" style="padding: 0;">
         <div class="col-md-12">
-                <c:forEach var="comments" items="${allcomments}">
+
+            <c:if test="${empty allcomments}">
+                <h2 style=" text-align: center;"> No comments yet! be the first one to comment ...</h2>
+            </c:if>
+
+            <c:forEach var="comments" items="${allcomments}">
+
                 <div class="row">
                     <div class="row" style="padding:4px;background-color: #D9D9D9;border-radius: 10px;">
                         <div class="col-md-10" style="font-weight: bold">> ${comments.userName}:</div>
                         <div class="col-md-2" style="text-align: right">(${comments.commentDate})</div>
                     </div>
-                    
+
                     <div class="row" style="border-bottom: #D9D9D9 solid 5px;padding:10px; background-color: #E8E8E8;margin: 0 auto;">
                         <div class="col-md-10">${comments.commentText}</div>
                         <div class="col-md-2" style="text-align: right">
@@ -144,7 +150,7 @@
                                     </jsp:include>
                                 </c:when>
                             </c:choose>
-                                    
+
                         </div>
                     </div>
                     <br />
@@ -152,7 +158,7 @@
             </c:forEach>
         </div>
 
-        
+
     </div>
 </div>
 
@@ -163,9 +169,9 @@
 <jsp:include page="/WEB-INF/ModalIncludes/addComment.jsp" >
     <jsp:param name="p" value="${player}" />
 </jsp:include>
-<%}else{%>
+<%} else {%>
 
-<a href="<%=request.getContextPath()%>/Register" style="text-decoration:  none;"><button type="button" class="CantAddCommentButton">Register/Login to add Comments !</button></a>
+<button type="button" class="CantAddCommentButton">Register/Login to add Comments</button>
 
 <% }%>
 
