@@ -81,7 +81,7 @@
 
                     <div class="row" style="padding-bottom:1px;border-bottom: #E7E7E7 solid 1px;margin: 10px 0 20px 0;">
                         <div class="col-md-6">Foot: <jsp:getProperty name="playerValues" property="playerFoot" /></div>
-                        
+
                     </div>
 
                 </div> 
@@ -93,9 +93,6 @@
                 <div class="row tab-pane fade" id="news">
                     <div class="row" style="padding-bottom:1px;border-bottom: #E7E7E7 solid 1px;margin: 0px 0 20px 0;">
                         News Coming Soon !
-                        <!-- <jsp:getProperty name="playerValues" property="playerPicture" /> -->
-
-
                     </div>
                 </div>
 
@@ -104,63 +101,73 @@
     </div>
 </div>
 
+<br />
 
-<c:forEach var="comments" items="${allcomments}">
-    <div>
-        ${comments.commentText} <br> ${comments.commentDate} <br> ${comments.userName}
+<h1 style=" display: inline;"> Comments</h1>
+
+<%if (request.getSession().getAttribute("username") != null) {%>
+<button type="button" class="addCommentButton" data-toggle="modal" data-target="#addComment">Leave a Comment</button>
+<jsp:include page="/WEB-INF/ModalIncludes/addComment.jsp" >
+    <jsp:param name="p" value="${player}" />
+</jsp:include>
+<%}else{%>
+
+<a href="<%=request.getContextPath()%>/Register" style="text-decoration:  none;"><button type="button" class="CantAddCommentButton">Register/Login to add Comments !</button></a>
+
+<% }%>
+
+<div style="background-color: #fff;padding:10px;border-bottom: #BD1418 solid 5px;border-top: #BD1418 solid 8px;"> 
+    <div class="container" style="padding: 0;">
+        <div class="col-md-12">
+                <c:forEach var="comments" items="${allcomments}">
+                <div class="row">
+                    <div class="row" style="padding:4px;background-color: #D9D9D9;border-radius: 10px;">
+                        <div class="col-md-10" style="font-weight: bold">> ${comments.userName}:</div>
+                        <div class="col-md-2" style="text-align: right">(${comments.commentDate})</div>
+                    </div>
+                    
+                    <div class="row" style="border-bottom: #D9D9D9 solid 5px;padding:10px; background-color: #E8E8E8;margin: 0 auto;">
+                        <div class="col-md-10">${comments.commentText}</div>
+                        <div class="col-md-2" style="text-align: right">
+                            <c:choose>
+                                <c:when test="${sessionScope.admin != null || sessionScope.username == comments.userName }">
+                                    <button type="button" class="CommentButton" data-toggle="modal" data-target="#editComment${comments.commentId}">Edit</button>
+
+                                    <form action="<%=request.getContextPath()%>/Players?p=<%out.write(request.getAttribute("player").toString());%>" method="POST" >
+                                        <input type="hidden" name="removeCommentId" id="username" size="20" value="${comments.commentId}" />
+                                        <input class="CommentButton" type="submit" name="action" value="Remove" />
+                                    </form>
+
+                                    <jsp:include page="/WEB-INF/ModalIncludes/editComment.jsp" >
+                                        <jsp:param name="p" value="${player}" />
+                                        <jsp:param name="id" value="${comments.commentId}" />
+                                    </jsp:include>
+                                </c:when>
+                            </c:choose>
+                                    
+                        </div>
+                    </div>
+                    <br />
+                </div> 
+            </c:forEach>
+        </div>
+
+        
     </div>
-
-    <c:choose>
-
-        <c:when test="${sessionScope.admin != null}">
-            <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#editComment${comments.commentId}">
-                Edit Comment
-            </button>
-            <form action="<%=request.getContextPath()%>/Players?p=<%out.write(request.getAttribute("player").toString());%>" method="POST" >
-                <input type="hidden" name="removeCommentId" id="username" size="20" value="${comments.commentId}" />
-                <input class="btn btn-default navbar-btn" type="submit" name="action" value="Remove" />
-            </form>
-            <jsp:include page="/WEB-INF/ModalIncludes/editComment.jsp" >
-                <jsp:param name="p" value="${player}" />
-                <jsp:param name="id" value="${comments.commentId}" />
-            </jsp:include>
-
-        </c:when>
-        <c:when test="${sessionScope.username == comments.userName}">   
-            <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#editComment${comments.commentId}">
-                Edit Comment
-            </button>
-            <form action="<%=request.getContextPath()%>/Players?p=<%out.write(request.getAttribute("player").toString());%>" method="POST" >
-                <input type="hidden" name="removeCommentId" id="username" size="20" value="${comments.commentId}" />
-                <input class="btn btn-default navbar-btn" type="submit" name="action" value="Remove" />
-            </form>
-            <jsp:include page="/WEB-INF/ModalIncludes/editComment.jsp" >
-                <jsp:param name="p" value="${player}" />
-                <jsp:param name="id" value="${comments.commentId}" />
-            </jsp:include>
-        </c:when>
-    </c:choose>
-
-
-</c:forEach>
+</div>
 
 
 
 <%if (request.getSession().getAttribute("username") != null) {%>
-<button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#addComment">
-    Leave a Comment
-</button>
+<button type="button" class="addCommentButton" data-toggle="modal" data-target="#addComment">Leave a Comment</button>
 <jsp:include page="/WEB-INF/ModalIncludes/addComment.jsp" >
     <jsp:param name="p" value="${player}" />
 </jsp:include>
+<%}else{%>
 
+<a href="<%=request.getContextPath()%>/Register" style="text-decoration:  none;"><button type="button" class="CantAddCommentButton">Register/Login to add Comments !</button></a>
 
-<%}%>
-
-
-
-
-
+<% }%>
 
 <% }%>
 

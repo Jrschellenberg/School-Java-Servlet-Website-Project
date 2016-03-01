@@ -1,8 +1,8 @@
-<% 
+<%
     String style = "";
-    if(request.getParameter("title") ==null ){ 
+    if (request.getParameter("title") == null) {
         style = "homeNav";
-    }else{
+    } else {
         style = "hNav";
     }
 %>
@@ -12,21 +12,22 @@
     <li><a href="<%=request.getContextPath()%>/Clubs">Clubs</a></li>
     <li><a href="<%=request.getContextPath()%>/Players">Players</a></li>
     <li><a href="<%=request.getContextPath()%>/Nations">Nations</a></li>
-    
-    <% if(request.getSession().getAttribute("username") !=null){ %>
-        <li><a href="<%=request.getContextPath()%>/Login?action=Logout">Logout</a></li>
-    <%}else{%>
-    <li><a href="<%=request.getContextPath()%>/Login">Login</a></li>
-    <li class="special"><a href="<%=request.getContextPath()%>/Register">Register</a></li>
+
+    <% if (request.getSession().getAttribute("username") != null) {%>
+            <li><a href="<%=request.getContextPath()%>/Login?action=Logout">Logout (<%out.write(request.getSession().getAttribute("username").toString());%>)</a></li>
+    <%} else {%>
+            <li><a href="<%=request.getContextPath()%>/Login">Login</a></li>
+            <li class="special"><a href="<%=request.getContextPath()%>/Register">Register</a></li>
     <%}%>
-    <% if(request.getSession().getAttribute("admin") != null){ %>
-    <li class="special"><a href="<%=request.getContextPath()%>/Admin">Admin</a></li>
+            
+    <% if (request.getSession().getAttribute("admin") != null) {%>
+        <li class="special"><a href="<%=request.getContextPath()%>/Admin">Admin</a></li>
     <%}%>
-    
-    
+
+
 </ul>
 
- 
 
-        
+
+
 
