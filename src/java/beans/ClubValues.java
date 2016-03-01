@@ -11,6 +11,7 @@ public class ClubValues {
     private String clubName;
     private String clubPicture;
     private String clubLeagueName;
+    private String clubLeaguePicture;
     
     /**
      *
@@ -21,6 +22,7 @@ public class ClubValues {
         clubName="";
         clubPicture="";
         clubLeagueName="";
+        clubLeaguePicture="";
     }
     
     /**
@@ -101,6 +103,22 @@ public class ClubValues {
      */
     public void setClubLeagueName(String clubLeagueName) {
         this.clubLeagueName = clubLeagueName;
+    }
+    
+        /**
+     *
+     * @return returns the League_Picture from the leagues table cross referenced by club_league_id from clubs table..
+     */
+    public String getClubLeaguePicture() {
+        return clubLeaguePicture;
+    }
+
+    /**
+     *
+     * @param clubLeaguePicture used to set the League Picture referenced by Club_league_id from clubs table.
+     */
+    public void setClubLeaguePicture(String clubLeaguePicture) {
+        this.clubLeaguePicture = clubLeaguePicture;
     }
 
 

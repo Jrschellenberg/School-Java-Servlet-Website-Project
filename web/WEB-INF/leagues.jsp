@@ -42,7 +42,7 @@
 <div class="row container" style="display: table;">
     <div class="col-sm-3 col-md-4 col-lg-3" style="color:#fff;height:100%;;background-color: #2E2E2E;float: none;display: table-cell;">
         <div class="row text-center" style="min-height: 200px;border-bottom: #BD1418 solid 5px;background-color: #fff">   
-            <img src="http://3.bp.blogspot.com/-TppYKVyfGGk/VNqG7XoA-VI/AAAAAAAAn4w/mO6qyNl2yuo/s1600/Premier%2BLeague.png" style="width:180px;height:180px;">
+            <img src="<%=request.getContextPath()%>/images/leagues/<c:out value="${clubs[0].clubLeaguePicture}"/>" style="width:180px;height:180px;">
         </div>
 
 

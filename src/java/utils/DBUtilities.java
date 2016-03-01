@@ -200,6 +200,7 @@ public class DBUtilities {
                     "SELECT * FROM leagues WHERE League_id='" + resultSet.getInt("club_league_id") + "' ");
             while (resultSetClubLeague.next()) {
                 values.setClubLeagueName(resultSetClubLeague.getString("league_name"));
+                values.setClubLeaguePicture(resultSetClubLeague.getString("league_picture"));
             }
 
             results.add(values);
