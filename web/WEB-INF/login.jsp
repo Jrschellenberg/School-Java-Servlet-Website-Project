@@ -37,7 +37,6 @@
     <div class="text-center" style="background-color:#E8E8E8; border-bottom: #BABABA solid 5px;padding: 5px 0 10px 0;"> 
         <input  class="userButton" type="submit" name="action" id="action" value="Login" />
         </form>
-
     </div>
     <%}%>
 </div>

@@ -7427,7 +7427,7 @@ input.user {
 }    
 
 span.help-block.form-error{
-     color: #fff;
+     color: #000;
  }
  
  /************************/
@@ -7536,5 +7536,6 @@ button:focus {
 	height:40px;
         margin: 10px;
         display:  inline;
+        cursor: default;
         
 }

@@ -70,7 +70,7 @@
                     </div>
 
                     <div class="row" style="padding-bottom:1px;border-bottom: #E7E7E7 solid 1px;margin: 10px 0 20px 0;">
-                        <div class="col-md-6">BirthDay: <jsp:getProperty name="playerValues" property="playerBirthday" /></div>
+                        <div class="col-md-6">Birthday: <jsp:getProperty name="playerValues" property="playerBirthday" /></div>
                         <div class="col-md-6">Position: <jsp:getProperty name="playerValues" property="playerPosition" /></div>
                     </div>
 

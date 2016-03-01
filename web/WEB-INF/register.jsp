@@ -6,7 +6,7 @@
 
     <div class="text-center" style="width:100%;margin: 100px 0 20px 0">  
         <jsp:useBean id="vObj" type="beans.UserValues" scope="request" />
-         <h2 style="color:#fff"><jsp:getProperty name="vObj" property="msg" /></h2>
+        <h2 style="color:#fff"><jsp:getProperty name="vObj" property="msg" /></h2>
     </div>
 
     <div class="text-center" style="border-top: #960C0F solid 5px;padding: 10px 0 10px 0;background-color:#BE1418;width:100%;border-bottom: #960C0F solid 5px;"> 
@@ -23,7 +23,7 @@
 
         <input class="userButton" type="submit" name="action" value="Register" />
         </form>
-        
+
     </div>
 
 </div>
