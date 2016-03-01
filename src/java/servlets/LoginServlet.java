@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet {
                     cookie = new Cookie(par_username, d.toString());
                     valueObject.setMsg("Welcome " + cookie.getName() + " For the first time!");
                 } else {
-                    valueObject.setMsg("Welcome Back " + cookie.getName() + " The last time you visited here was " + cookie.getValue());
+                    valueObject.setMsg("Welcome Back " + cookie.getName() + "! <br /> The last time you visited here was " + cookie.getValue());
                     cookie = new Cookie(par_username, d.toString());
                 }
                 cookie.setMaxAge(60 * 60 * 24 * 30);
