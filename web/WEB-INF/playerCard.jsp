@@ -23,7 +23,7 @@
                 <strong>${p.playerName}</strong>
 
                 <!-- player position -->
-                <div style="font-size:14pt;color:#9f9f9f;text-transform:capitalize;">${p.playerPosition}</div>';
+                <div style="font-size:14pt;color:#9f9f9f;text-transform:capitalize;">${p.playerPosition}</div>
 
             </div>  
         </div>

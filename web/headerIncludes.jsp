@@ -22,7 +22,7 @@
                             <span class="icon-bar"></span>
                         </button>
 
-                        <a class="navbar-brand" title="Home" href="<%=request.getContextPath()%>/Home">
+                        <a class="navbar-brand" title="Home" href="<%=request.getContextPath()%>/">
                             <img src="images/logo-small.png" alt="shoot 24" style="width:181px;height: 49px;">
                         </a>
                         <form id="search" action="<%=request.getContextPath()%>/Search" method="GET" enctype="text/plain" style="float:  right;">
