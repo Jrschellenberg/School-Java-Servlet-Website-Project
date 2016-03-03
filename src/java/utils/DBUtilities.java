@@ -985,7 +985,7 @@ public class DBUtilities {
      */
     public String getUserId(String username) throws ClassNotFoundException, SQLException {
 
-        ResultSet resultSet = DBconnection.db.query("SELECT User_id FROM users WHERE User_username='" + username + "'");
+        ResultSet resultSet = DBconnection.db.query("SELECT User_id FROM users WHERE User_username='" + username + "';");
 
         while (resultSet.next()) {
             return resultSet.getString("User_id");
